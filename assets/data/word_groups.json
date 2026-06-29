@@ -1,0 +1,24 @@
+{
+  "groups": [
+    {"id": "language",    "label": "ことば・文字",   "emoji": "📚", "color": "#E3F2FD", "order": 1},
+    {"id": "food",        "label": "食べ物・料理",   "emoji": "🍱", "color": "#FFF3E0", "order": 2},
+    {"id": "home",        "label": "家・生活",       "emoji": "🏠", "color": "#FFF9C4", "order": 3},
+    {"id": "nature",      "label": "自然・植物",     "emoji": "🌿", "color": "#E8F5E9", "order": 4},
+    {"id": "weather",     "label": "天気・気候",     "emoji": "⛅", "color": "#E3F2FD", "order": 5},
+    {"id": "animal",      "label": "動物・生き物",   "emoji": "🐾", "color": "#FFF9C4", "order": 6},
+    {"id": "body",        "label": "体・健康",       "emoji": "💊", "color": "#FCE4EC", "order": 7},
+    {"id": "emotion",     "label": "気持ち・性格",   "emoji": "💭", "color": "#F3E5F5", "order": 8},
+    {"id": "school",      "label": "学校・勉強",     "emoji": "✏️", "color": "#E8EAF6", "order": 9},
+    {"id": "sport",       "label": "スポーツ・遊び", "emoji": "⚽", "color": "#FFF3E0", "order": 10},
+    {"id": "art",         "label": "芸術・文化",     "emoji": "🎨", "color": "#FCE4EC", "order": 11},
+    {"id": "science",     "label": "理科・宇宙",     "emoji": "🔬", "color": "#E8EAF6", "order": 12},
+    {"id": "math",        "label": "算数・数学",     "emoji": "📐", "color": "#FFF9C4", "order": 13},
+    {"id": "technology",  "label": "テクノロジー",   "emoji": "💻", "color": "#E8EAF6", "order": 14},
+    {"id": "transport",   "label": "乗り物・交通",   "emoji": "🚌", "color": "#EFEBE9", "order": 15},
+    {"id": "travel",      "label": "旅行・おでかけ", "emoji": "✈️", "color": "#E8F5E9", "order": 16},
+    {"id": "job",         "label": "職業・仕事",     "emoji": "👷", "color": "#FFF3E0", "order": 17},
+    {"id": "environment", "label": "環境・社会問題", "emoji": "🌍", "color": "#E8F5E9", "order": 18},
+    {"id": "society",     "label": "社会・人",       "emoji": "🏙️", "color": "#EFEBE9", "order": 19},
+    {"id": "other",       "label": "その他",         "emoji": "📖", "color": "#F5F5F5", "order": 20}
+  ]
+}
