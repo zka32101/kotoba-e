@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:kotoba_e/models/tree_node.dart';
 
 class TreeGrowthAnimation extends StatefulWidget {
