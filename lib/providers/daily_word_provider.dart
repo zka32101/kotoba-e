@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:kotoba_e/models/daily_word_model.dart';
-import 'dart:convert';
 
 /// 本日の季節用語を取得
 final todaysDailyWordProvider = FutureProvider<DailyWord?>((ref) async {
