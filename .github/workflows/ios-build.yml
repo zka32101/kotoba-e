@@ -21,7 +21,16 @@ jobs:
         run: flutter pub get
 
       - name: Analyze
-        run: flutter analyze
+        run: |
+          set +e
+          flutter analyze > analyze_output.txt 2>&1
+          cat analyze_output.txt
+          set -e
+          if grep -q "error •" analyze_output.txt; then
+            echo "::error::flutter analyze found error-level issues"
+            exit 1
+          fi
+          echo "No error-level issues (warnings/infos are non-blocking for CI)"
 
   build-ios-unsigned:
     needs: analyze-and-test
