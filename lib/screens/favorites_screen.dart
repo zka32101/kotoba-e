@@ -100,7 +100,7 @@ class _BookmarkList extends StatelessWidget {
             padding: const EdgeInsets.only(right: 20),
             decoration: BoxDecoration(
               color: AppTheme.error,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
             ),
             child: const Icon(Icons.delete, color: Colors.white),
           ),
@@ -110,12 +110,12 @@ class _BookmarkList extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: isDue ? AppTheme.secondary.withValues(alpha: 0.5) : AppTheme.divider,
-                  width: isDue ? 1.5 : 1,
-                ),
+                color: AppTheme.surface,
+                borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                border: isDue
+                    ? Border.all(color: AppTheme.secondary.withValues(alpha: 0.5), width: 1.5)
+                    : null,
+                boxShadow: AppTheme.softShadow,
               ),
               child: Row(
                 children: [

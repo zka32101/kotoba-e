@@ -9,18 +9,20 @@ import 'package:kotoba_e/utils/router_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Firebase 初期化
+  await localStorageService.init();
+
+  // Firebase 初期化（既に初期化されている場合はスキップ）
   // firebase_options.dart の値を flutterfire configure で本番値に置き換えてください。
   try {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+    if (Firebase.apps.isEmpty) {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    }
   } catch (e) {
     // プレースホルダー値のまま起動した場合はオフラインモードで継続
     debugPrint('[Firebase] 初期化スキップ: $e');
   }
-
-  await localStorageService.init();
 
   runApp(
     const ProviderScope(

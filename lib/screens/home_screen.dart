@@ -122,8 +122,8 @@ class _StreakShowcase extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppTheme.primary.withOpacity(0.2)),
+        borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
+        border: Border.all(color: AppTheme.primary.withOpacity(0.15)),
       ),
       child: Column(
         children: [
@@ -154,7 +154,7 @@ class _StreakShowcase extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
               color: todayDone ? AppTheme.success : AppTheme.secondary,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(AppTheme.radiusSmall),
             ),
             child: Text(
               todayDone ? '✅ 本日完了！' : '⏳ 本日のクイズに取り組む',
@@ -231,17 +231,13 @@ class _QuizCTA extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [AppTheme.secondary, AppTheme.secondary.withOpacity(0.8)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(16),
+          gradient: AppTheme.warmGradient,
+          borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
           boxShadow: [
             BoxShadow(
               color: AppTheme.secondary.withOpacity(0.3),
-              blurRadius: 8,
-              offset: const Offset(0, 4),
+              blurRadius: 16,
+              offset: const Offset(0, 6),
             ),
           ],
         ),
@@ -364,7 +360,7 @@ class _LanguageButton extends StatelessWidget {
             color: isSelected ? AppTheme.primary : AppTheme.divider,
             width: 2,
           ),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(AppTheme.radiusSmall),
         ),
         child: Text(
           label,
@@ -396,9 +392,9 @@ class _SearchBox extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: AppTheme.divider),
-          borderRadius: BorderRadius.circular(12),
+          color: AppTheme.surface,
+          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+          boxShadow: AppTheme.softShadow,
         ),
         child: Row(
           children: const [
@@ -437,16 +433,12 @@ class _RandomWordButton extends ConsumerWidget {
         width: 48,
         height: 48,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [AppTheme.accent, AppTheme.accent.withOpacity(0.7)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(12),
+          gradient: AppTheme.growthGradient,
+          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
           boxShadow: [
             BoxShadow(
               color: AppTheme.accent.withOpacity(0.3),
-              blurRadius: 6,
+              blurRadius: 8,
               offset: const Offset(0, 3),
             ),
           ],
@@ -516,16 +508,9 @@ class _FeatureCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: AppTheme.divider),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.03),
-              blurRadius: 4,
-              offset: const Offset(0, 2),
-            ),
-          ],
+          color: AppTheme.surface,
+          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+          boxShadow: AppTheme.softShadow,
         ),
         child: Padding(
           padding: const EdgeInsets.all(12),
@@ -576,9 +561,8 @@ class _UserCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppTheme.background,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppTheme.divider),
+        color: AppTheme.surfaceAlt,
+        borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
       ),
       child: Row(
         children: [

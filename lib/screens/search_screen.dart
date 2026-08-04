@@ -69,7 +69,10 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                         },
                       )
                     : null,
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+                  borderSide: BorderSide.none,
+                ),
                 contentPadding: const EdgeInsets.symmetric(vertical: 14),
               ),
             ),
@@ -183,12 +186,12 @@ class _CategoryChip extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            color: isSelected ? AppTheme.primary : Colors.white,
+            color: isSelected ? AppTheme.primary : AppTheme.surface,
             border: Border.all(
               color: isSelected ? AppTheme.primary : AppTheme.divider,
               width: 1.5,
             ),
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -239,16 +242,9 @@ class _WordTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: AppTheme.divider),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.03),
-              blurRadius: 4,
-              offset: const Offset(0, 2),
-            )
-          ],
+          color: AppTheme.surface,
+          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+          boxShadow: AppTheme.softShadow,
         ),
         child: Row(
           children: [
@@ -258,7 +254,7 @@ class _WordTile extends StatelessWidget {
               height: 56,
               decoration: BoxDecoration(
                 color: _hexToColor(word.illustrationPlaceholder),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(AppTheme.radiusSmall),
               ),
               alignment: Alignment.center,
               child: Text(

@@ -22,18 +22,19 @@ class WelcomeScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 20),
 
-                // ── アプリロゴ・イラスト ──
+                // ── アプリロゴ・マスコット ──
                 Container(
                   width: isMobile ? 120 : 160,
                   height: isMobile ? 120 : 160,
                   decoration: BoxDecoration(
                     color: AppTheme.primaryLight.withOpacity(0.3),
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
                   ),
-                  child: Center(
-                    child: Text(
-                      '📚',
-                      style: TextStyle(fontSize: isMobile ? 60 : 80),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
+                    child: Image.asset(
+                      'assets/images/brand/mascot.png',
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
@@ -76,6 +77,17 @@ class WelcomeScreen extends StatelessWidget {
                     fontFamily: 'NotoSansJP',
                   ),
                 ),
+                const SizedBox(height: 24),
+
+                // ── ヒーローイラスト ──
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
+                  child: Image.asset(
+                    'assets/images/brand/welcome_hero.png',
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 const SizedBox(height: 32),
 
                 // ── 特徴アイコン行 ──
@@ -83,17 +95,17 @@ class WelcomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     _FeatureCard(
-                      icon: '🧠',
+                      imagePath: 'assets/images/features/feature_srs.png',
                       label: 'SRS学習',
                       description: '忘却曲線で\n効率的に',
                     ),
                     _FeatureCard(
-                      icon: '🏆',
+                      imagePath: 'assets/images/features/feature_gamify.png',
                       label: 'ゲーミフィ',
                       description: 'バッジ・\nストリーク',
                     ),
                     _FeatureCard(
-                      icon: '📱',
+                      imagePath: 'assets/images/features/feature_offline.png',
                       label: 'オフライン',
                       description: 'ネット不要\nで学習',
                     ),
@@ -158,12 +170,14 @@ class WelcomeScreen extends StatelessWidget {
 }
 
 class _FeatureCard extends StatelessWidget {
-  final String icon;
+  final String? imagePath;
+  final String fallbackEmoji;
   final String label;
   final String description;
 
   const _FeatureCard({
-    required this.icon,
+    this.imagePath,
+    this.fallbackEmoji = '✨',
     required this.label,
     required this.description,
   });
@@ -172,7 +186,12 @@ class _FeatureCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(icon, style: const TextStyle(fontSize: 40)),
+        imagePath != null
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(AppTheme.radiusSmall),
+                child: Image.asset(imagePath!, width: 40, height: 40, fit: BoxFit.cover),
+              )
+            : Text(fallbackEmoji, style: const TextStyle(fontSize: 40)),
         const SizedBox(height: 8),
         Text(
           label,

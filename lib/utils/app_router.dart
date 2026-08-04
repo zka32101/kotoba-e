@@ -11,6 +11,9 @@ import 'package:kotoba_e/screens/quiz_screen.dart';
 import 'package:kotoba_e/screens/favorites_screen.dart';
 import 'package:kotoba_e/screens/settings_screen.dart';
 import 'package:kotoba_e/screens/stats_screen.dart';
+import 'package:kotoba_e/screens/tree_screen.dart';
+import 'package:kotoba_e/screens/tree_detail_screen.dart';
+import 'package:kotoba_e/screens/daily_word_screen.dart';
 import 'package:kotoba_e/services/local_storage_service.dart';
 
 final appRouter = GoRouter(
@@ -70,6 +73,21 @@ final appRouter = GoRouter(
         GoRoute(
           path: '/home/stats',
           builder: (context, state) => const StatsScreen(),
+        ),
+        GoRoute(
+          path: '/home/tree',
+          builder: (context, state) => const TreeScreen(),
+        ),
+        GoRoute(
+          path: '/home/tree/:wordId',
+          builder: (context, state) {
+            final wordId = state.pathParameters['wordId'] ?? '';
+            return TreeDetailScreen(wordId: wordId);
+          },
+        ),
+        GoRoute(
+          path: '/home/daily-word',
+          builder: (context, state) => const DailyWordScreen(),
         ),
       ],
     ),

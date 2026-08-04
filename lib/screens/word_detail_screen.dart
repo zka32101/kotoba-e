@@ -262,7 +262,7 @@ class _RelatedWordChip extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppTheme.primaryLight.withOpacity(0.3),
           border: Border.all(color: AppTheme.primary.withOpacity(0.5)),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -323,7 +323,7 @@ class _KanjiConnectionSection extends ConsumerWidget {
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
                     color: AppTheme.accent.withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(AppTheme.radiusSmall),
                   ),
                   child: Text(
                     kanji,
@@ -362,7 +362,7 @@ class _KanjiConnectionSection extends ConsumerWidget {
                           color: AppTheme.accent.withOpacity(0.08),
                           border: Border.all(
                               color: AppTheme.accent.withOpacity(0.4)),
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(AppTheme.radiusLarge),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -535,7 +535,7 @@ class _DescriptionBox extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: AppTheme.background,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
         border: Border.all(color: AppTheme.divider),
       ),
       child: Text(
@@ -556,7 +556,7 @@ class _NuanceBox extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: AppTheme.background,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
         border: Border.all(color: AppTheme.divider),
       ),
       child: Column(
@@ -592,7 +592,7 @@ class _SrsInfo extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: AppTheme.primaryLight.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
         border: Border.all(color: AppTheme.primary.withOpacity(0.3)),
       ),
       child: Row(
