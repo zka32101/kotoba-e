@@ -175,9 +175,9 @@ class _FeatureCard extends StatelessWidget {
   final String label;
   final String description;
 
-  // ignore: unused_element_parameter
   const _FeatureCard({
     this.imagePath,
+    // ignore: unused_element_parameter
     this.fallbackEmoji = '✨',
     required this.label,
     required this.description,
