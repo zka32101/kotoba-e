@@ -197,7 +197,8 @@ class _PaywallModal extends ConsumerWidget {
                     ),
                   ],
                 ),
-              );
+              ),
+            );
           },
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (err, stack) => Center(
