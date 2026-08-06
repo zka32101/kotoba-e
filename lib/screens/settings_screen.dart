@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kotoba_e/config/theme.dart';
 import 'package:kotoba_e/providers/auth_provider.dart';
+import 'package:kotoba_e/providers/subscription_provider.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -105,6 +106,17 @@ class SettingsScreen extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 24),
+
+          // ── プレミアム ──
+          _SectionTitle(label: 'プレミアム'),
+          const SizedBox(height: 8),
+          _ActionTile(
+            icon: Icons.star,
+            label: 'サブスクリプション管理',
+            color: AppTheme.primary,
+            onTap: () => context.go('/home/paywall'),
+          ),
+          const SizedBox(height: 20),
 
           // ── アカウント操作 ──
           _SectionTitle(label: 'アカウント'),
