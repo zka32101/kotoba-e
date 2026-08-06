@@ -11,13 +11,13 @@ class RevenueCatService {
   // ── 初期化 ───────────────────────────────────
   Future<void> initialize({required String userId}) async {
     try {
-      await Purchases.setDebugLogsEnabled(true);
+      await Purchases.setLogLevel(LogLevel.debug);
 
       // API キー設定（プラットフォーム別）
       await Purchases.configure(
         PurchasesConfiguration(
           _iosApiKey,
-          androidAPIKey: _androidApiKey,
+          googlePlayApiKey: _androidApiKey,
         ),
       );
 
@@ -100,10 +100,10 @@ class RevenueCatService {
   }
 
   // ── アクティブなエンタイトルメント取得 ───────────────────────────────────
-  Entitlement? get activeEntitlement {
+  EntitlementInfo? get activeEntitlement {
     final entitlements = _customerInfo.entitlements.all;
     final premium = entitlements['premium'];
-    return premium != null && premium.isActive ? premium : null;
+    return (premium != null && premium.isActive) ? premium : null;
   }
 
   // ── 購読を解約 ───────────────────────────────────
@@ -133,16 +133,13 @@ class RevenueCatService {
       return 'free';
     }
 
-    // LatestEntitlement から購読タイプを判定
-    final latest = premium.latestPurchaseInfo;
-    if (latest != null) {
-      // productIdentifier から月額/年額を判定（RevenueCat コンソール設定に応じる）
-      if (latest.productIdentifier.contains('monthly')) {
-        return 'premium_monthly';
-      } else if (latest.productIdentifier.contains('yearly') ||
-          latest.productIdentifier.contains('annual')) {
-        return 'premium_yearly';
-      }
+    // productIdentifier から月額/年額を判定（RevenueCat コンソール設定に応じる）
+    // premium.productIdentifier が存在しない場合は、デフォルトで monthly と判定
+    final productId = premium.productIdentifier ?? '';
+    if (productId.contains('monthly')) {
+      return 'premium_monthly';
+    } else if (productId.contains('yearly') || productId.contains('annual')) {
+      return 'premium_yearly';
     }
 
     return 'premium_monthly'; // デフォルト
@@ -161,8 +158,8 @@ class RevenueCatService {
 
   // ── 顧客情報のストリーム（リアクティブ監視） ───────────────────────────────────
   Stream<CustomerInfo> get customerInfoStream {
-    // Purchases.customerInfoStream を使用して自動監視
-    return Purchases.customerInfoStream;
+    // Purchases.customerInfoUpdatedStream を使用して自動監視
+    return Purchases.customerInfoUpdatedStream;
   }
 }
 

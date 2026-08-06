@@ -37,14 +37,14 @@ final isPremiumProvider = Provider<bool>((ref) {
 
 // ── Active Entitlement Provider ───────────────────────────────────
 final activeEntitlementProvider =
-    Provider<Entitlement?>((ref) {
+    Provider<EntitlementInfo?>((ref) {
   final customerInfo = ref.watch(customerInfoStreamProvider);
 
   return customerInfo.when(
     data: (info) {
       final entitlements = info.entitlements.all;
       final premium = entitlements['premium'];
-      return premium != null && premium.isActive ? premium : null;
+      return (premium != null && premium.isActive) ? premium : null;
     },
     loading: () => null,
     error: (err, stack) => null,
@@ -69,14 +69,11 @@ final subscriptionStatusProvider = Provider<String>((ref) {
       }
 
       // productIdentifier から月額/年額を判定
-      final latest = premium.latestPurchaseInfo;
-      if (latest != null) {
-        if (latest.productIdentifier.contains('monthly')) {
-          return 'premium_monthly';
-        } else if (latest.productIdentifier.contains('yearly') ||
-            latest.productIdentifier.contains('annual')) {
-          return 'premium_yearly';
-        }
+      final productId = premium.productIdentifier ?? '';
+      if (productId.contains('monthly')) {
+        return 'premium_monthly';
+      } else if (productId.contains('yearly') || productId.contains('annual')) {
+        return 'premium_yearly';
       }
 
       return 'premium_monthly'; // デフォルト
