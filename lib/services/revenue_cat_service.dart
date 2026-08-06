@@ -1,5 +1,4 @@
 import 'package:purchases_flutter/purchases_flutter.dart';
-import 'package:kotoba_e/models/user_model.dart';
 
 class RevenueCatService {
   static const String _iosApiKey = 'appl_MYaGkIbVqVxkIAjCwFgjdHMZWqJ';
@@ -13,12 +12,10 @@ class RevenueCatService {
     try {
       await Purchases.setLogLevel(LogLevel.debug);
 
-      // API キー設定（プラットフォーム別）
+      // API キー設定
       await Purchases.configure(
-        PurchasesConfiguration(
-          _iosApiKey,
-          googlePlayApiKey: _androidApiKey,
-        ),
+        PurchasesConfiguration(_iosApiKey)
+          ..androidAPIKey = _androidApiKey,
       );
 
       // ユーザー ID 設定
@@ -94,9 +91,15 @@ class RevenueCatService {
 
   // ── サブスクリプション状態判定 ───────────────────────────────────
   bool get isPremium {
-    final entitlements = _customerInfo.entitlements.all;
-    return entitlements.containsKey('premium') &&
-        entitlements['premium']!.isActive;
+    try {
+      final entitlements = _customerInfo.entitlements.all;
+      if (!entitlements.containsKey('premium')) {
+        return false;
+      }
+      return entitlements['premium']?.isActive ?? false;
+    } catch (_) {
+      return false;
+    }
   }
 
   // ── アクティブなエンタイトルメント取得 ───────────────────────────────────
@@ -122,44 +125,60 @@ class RevenueCatService {
 
   // ── ユーザーモデルへの変換 ───────────────────────────────────
   String getSubscriptionStatusFromCustomerInfo() {
-    final entitlements = _customerInfo.entitlements.all;
+    try {
+      final entitlements = _customerInfo.entitlements.all;
 
-    if (!entitlements.containsKey('premium')) {
+      if (!entitlements.containsKey('premium')) {
+        return 'free';
+      }
+
+      final premium = entitlements['premium'];
+      if (premium == null || !premium.isActive) {
+        return 'free';
+      }
+
+      // productIdentifier から月額/年額を判定（RevenueCat コンソール設定に応じる）
+      final productId = premium.productIdentifier;
+      if (productId != null) {
+        if (productId.contains('monthly')) {
+          return 'premium_monthly';
+        } else if (productId.contains('yearly') || productId.contains('annual')) {
+          return 'premium_yearly';
+        }
+      }
+
+      return 'premium_monthly'; // デフォルト
+    } catch (_) {
       return 'free';
     }
-
-    final premium = entitlements['premium']!;
-    if (!premium.isActive) {
-      return 'free';
-    }
-
-    // productIdentifier から月額/年額を判定（RevenueCat コンソール設定に応じる）
-    // premium.productIdentifier が存在しない場合は、デフォルトで monthly と判定
-    final productId = premium.productIdentifier ?? '';
-    if (productId.contains('monthly')) {
-      return 'premium_monthly';
-    } else if (productId.contains('yearly') || productId.contains('annual')) {
-      return 'premium_yearly';
-    }
-
-    return 'premium_monthly'; // デフォルト
   }
 
   DateTime? getSubscriptionExpiresAt() {
-    final entitlements = _customerInfo.entitlements.all;
-    if (!entitlements.containsKey('premium')) {
+    try {
+      final entitlements = _customerInfo.entitlements.all;
+      if (!entitlements.containsKey('premium')) {
+        return null;
+      }
+
+      final premium = entitlements['premium'];
+      if (premium == null) {
+        return null;
+      }
+      return premium.expirationDate;
+    } catch (_) {
       return null;
     }
-
-    final premium = entitlements['premium']!;
-    final expiration = premium.expirationDate;
-    return expiration;
   }
 
   // ── 顧客情報のストリーム（リアクティブ監視） ───────────────────────────────────
   Stream<CustomerInfo> get customerInfoStream {
-    // Purchases.customerInfoUpdatedStream を使用して自動監視
-    return Purchases.customerInfoUpdatedStream;
+    // Purchases.purchaserInfoStream を使用して顧客情報の自動監視
+    try {
+      return Purchases.customerInfoStream;
+    } catch (_) {
+      // customerInfoStream が利用できない場合は、一度きりの情報を流す
+      return Stream.value(_customerInfo);
+    }
   }
 }
 

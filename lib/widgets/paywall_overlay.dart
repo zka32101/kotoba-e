@@ -138,7 +138,7 @@ class _PaywallModal extends ConsumerWidget {
                     // 月額プラン
                     _MiniPlanOption(
                       title: 'プレミアム（月額）',
-                      price: monthly.storeProduct.priceString ?? '¥550',
+                      price: monthly.storeProduct.priceString,
                       description: '毎月自動更新',
                       package: monthly,
                     ),
@@ -149,7 +149,7 @@ class _PaywallModal extends ConsumerWidget {
                       children: [
                         _MiniPlanOption(
                           title: 'プレミアム（年額）',
-                          price: yearly.storeProduct.priceString ?? '¥5,500',
+                          price: yearly.storeProduct.priceString,
                           description: '毎年自動更新',
                           package: yearly,
                         ),

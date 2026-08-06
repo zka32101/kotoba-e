@@ -69,11 +69,13 @@ final subscriptionStatusProvider = Provider<String>((ref) {
       }
 
       // productIdentifier から月額/年額を判定
-      final productId = premium.productIdentifier ?? '';
-      if (productId.contains('monthly')) {
-        return 'premium_monthly';
-      } else if (productId.contains('yearly') || productId.contains('annual')) {
-        return 'premium_yearly';
+      final productId = premium.productIdentifier;
+      if (productId != null) {
+        if (productId.contains('monthly')) {
+          return 'premium_monthly';
+        } else if (productId.contains('yearly') || productId.contains('annual')) {
+          return 'premium_yearly';
+        }
       }
 
       return 'premium_monthly'; // デフォルト
@@ -95,8 +97,19 @@ final subscriptionExpiresAtProvider =
         return null;
       }
 
-      final premium = entitlements['premium']!;
-      return premium.expirationDate;
+      final premium = entitlements['premium'];
+      if (premium == null) {
+        return null;
+      }
+      final expirationDateStr = premium.expirationDate;
+      if (expirationDateStr == null) {
+        return null;
+      }
+      try {
+        return DateTime.parse(expirationDateStr);
+      } catch (_) {
+        return null;
+      }
     },
     loading: () => null,
     error: (err, stack) => null,
