@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
@@ -194,9 +195,9 @@ class PaywallScreen extends ConsumerWidget {
     );
   }
 
-  void _purchasePackage(BuildContext context, WidgetRef ref, Package package) async {
+  void _purchasePackage(BuildContext context, WidgetRef ref, Package package) {
     try {
-      ref.read(purchasePackageProvider.notifier).purchasePackage(package);
+      unawaited(ref.read(purchasePackageProvider.notifier).purchasePackage(package));
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('購入処理中...')),
       );
@@ -208,9 +209,9 @@ class PaywallScreen extends ConsumerWidget {
     }
   }
 
-  void _restorePurchases(BuildContext context, WidgetRef ref) async {
+  void _restorePurchases(BuildContext context, WidgetRef ref) {
     try {
-      ref.read(restorePurchasesProvider.notifier).restorePurchases();
+      unawaited(ref.read(restorePurchasesProvider.notifier).restorePurchases());
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('購入を復元中...')),
       );

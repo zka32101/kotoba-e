@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
@@ -274,9 +275,9 @@ class _MiniPlanOption extends ConsumerWidget {
     );
   }
 
-  void _purchasePackage(BuildContext context, WidgetRef ref) async {
+  void _purchasePackage(BuildContext context, WidgetRef ref) {
     try {
-      ref.read(purchasePackageProvider.notifier).purchasePackage(package);
+      unawaited(ref.read(purchasePackageProvider.notifier).purchasePackage(package));
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('購入処理中...')),
       );
