@@ -90,9 +90,7 @@ class PaywallScreen extends ConsumerWidget {
               // ── 月額プランカード ──
               _PlanCard(
                 title: 'プレミアム（月額）',
-                price: monthly.packageType == PackageType.monthly
-                    ? (monthly.storeProduct.priceString)
-                    : '¥550',
+                price: monthly.storeProduct.priceString,
                 description: '月単位で購読',
                 features: const [
                   '無料プランの全機能',
@@ -111,9 +109,7 @@ class PaywallScreen extends ConsumerWidget {
                 children: [
                   _PlanCard(
                     title: 'プレミアム（年額）',
-                    price: yearly.packageType == PackageType.annual
-                        ? (yearly.storeProduct.priceString)
-                        : '¥5,500',
+                    price: yearly.storeProduct.priceString,
                     description: '年単位で購読',
                     features: const [
                       '無料プランの全機能',
