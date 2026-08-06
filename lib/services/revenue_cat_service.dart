@@ -1,6 +1,6 @@
 import 'package:purchases_flutter/purchases_flutter.dart';
 
-/// RevenueCat サービス（簡易実装）
+/// RevenueCat サービス（簡易実装版）
 /// 注：本番環境では適切な API キー設定と ネイティブ設定が必要です
 class RevenueCatService {
   static const String _iosApiKey = 'appl_MYaGkIbVqVxkIAjCwFgjdHMZWqJ';
