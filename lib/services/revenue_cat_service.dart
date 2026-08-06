@@ -1,31 +1,27 @@
 import 'package:purchases_flutter/purchases_flutter.dart';
 
+/// RevenueCat サービス（簡易実装）
+/// 注：本番環境では適切な API キー設定と ネイティブ設定が必要です
 class RevenueCatService {
   static const String _iosApiKey = 'appl_MYaGkIbVqVxkIAjCwFgjdHMZWqJ';
   static const String _androidApiKey = 'goog_BXVYVJfNmrZiLpWlYYLhHzVwKJJ';
 
   late CustomerInfo _customerInfo;
   late List<Package> _packages;
+  bool _initialized = false;
 
   // ── 初期化 ───────────────────────────────────
   Future<void> initialize({required String userId}) async {
+    if (_initialized) return;
+
     try {
-      await Purchases.setLogLevel(LogLevel.debug);
-
-      // API キー設定
       await Purchases.configure(
-        PurchasesConfiguration(_iosApiKey)
-          ..androidAPIKey = _androidApiKey,
+        PurchasesConfiguration(_iosApiKey),
       );
-
-      // ユーザー ID 設定
-      await Purchases.logIn(userId);
-
-      // 初期顧客情報取得
-      _customerInfo = await Purchases.getCustomerInfo();
+      _initialized = true;
+      await setUserId(userId);
     } catch (e) {
-      print('RevenueCat初期化エラー: $e');
-      rethrow;
+      print('[RevenueCat] 初期化エラー: $e');
     }
   }
 
@@ -35,8 +31,7 @@ class RevenueCatService {
       await Purchases.logIn(userId);
       _customerInfo = await Purchases.getCustomerInfo();
     } catch (e) {
-      print('RevenueCat ユーザーID設定エラー: $e');
-      rethrow;
+      print('[RevenueCat] ユーザーID設定エラー: $e');
     }
   }
 
@@ -45,8 +40,7 @@ class RevenueCatService {
     try {
       await Purchases.logOut();
     } catch (e) {
-      print('RevenueCat ログアウトエラー: $e');
-      rethrow;
+      print('[RevenueCat] ログアウトエラー: $e');
     }
   }
 
@@ -56,7 +50,7 @@ class RevenueCatService {
       _customerInfo = await Purchases.getCustomerInfo();
       return _customerInfo;
     } catch (e) {
-      print('RevenueCat 顧客情報取得エラー: $e');
+      print('[RevenueCat] 顧客情報取得エラー: $e');
       rethrow;
     }
   }
@@ -72,8 +66,8 @@ class RevenueCatService {
       _packages = current.availablePackages;
       return _packages;
     } catch (e) {
-      print('RevenueCat パッケージ取得エラー: $e');
-      rethrow;
+      print('[RevenueCat] パッケージ取得エラー: $e');
+      return [];
     }
   }
 
@@ -84,7 +78,7 @@ class RevenueCatService {
       _customerInfo = customerInfo;
       return customerInfo;
     } catch (e) {
-      print('RevenueCat 購入エラー: $e');
+      print('[RevenueCat] 購入エラー: $e');
       rethrow;
     }
   }
@@ -92,62 +86,35 @@ class RevenueCatService {
   // ── サブスクリプション状態判定 ───────────────────────────────────
   bool get isPremium {
     try {
+      if (!_initialized) return false;
       final entitlements = _customerInfo.entitlements.all;
-      if (!entitlements.containsKey('premium')) {
-        return false;
-      }
-      return entitlements['premium']?.isActive ?? false;
+      final premium = entitlements['premium'];
+      return premium != null && premium.isActive;
     } catch (_) {
       return false;
-    }
-  }
-
-  // ── アクティブなエンタイトルメント取得 ───────────────────────────────────
-  EntitlementInfo? get activeEntitlement {
-    final entitlements = _customerInfo.entitlements.all;
-    final premium = entitlements['premium'];
-    return (premium != null && premium.isActive) ? premium : null;
-  }
-
-  // ── 購読を解約 ───────────────────────────────────
-  Future<void> cancelSubscription() async {
-    try {
-      if (Purchases.canMakePayments()) {
-        // ネイティブ実装に委譲（iOS/Android）
-        // 実装はプラットフォーム側で行う必要がある
-        print('購読キャンセル: ネイティブ側で処理してください');
-      }
-    } catch (e) {
-      print('RevenueCat キャンセルエラー: $e');
-      rethrow;
     }
   }
 
   // ── ユーザーモデルへの変換 ───────────────────────────────────
   String getSubscriptionStatusFromCustomerInfo() {
     try {
+      if (!_initialized) return 'free';
+
       final entitlements = _customerInfo.entitlements.all;
-
-      if (!entitlements.containsKey('premium')) {
-        return 'free';
-      }
-
       final premium = entitlements['premium'];
+
       if (premium == null || !premium.isActive) {
         return 'free';
       }
 
-      // productIdentifier から月額/年額を判定（RevenueCat コンソール設定に応じる）
       final productId = premium.productIdentifier;
-      if (productId != null) {
-        if (productId.contains('monthly')) {
-          return 'premium_monthly';
-        } else if (productId.contains('yearly') || productId.contains('annual')) {
-          return 'premium_yearly';
-        }
+      if (productId != null && productId.contains('monthly')) {
+        return 'premium_monthly';
+      } else if (productId != null && (productId.contains('yearly') || productId.contains('annual'))) {
+        return 'premium_yearly';
       }
 
-      return 'premium_monthly'; // デフォルト
+      return 'premium_monthly';
     } catch (_) {
       return 'free';
     }
@@ -155,29 +122,33 @@ class RevenueCatService {
 
   DateTime? getSubscriptionExpiresAt() {
     try {
-      final entitlements = _customerInfo.entitlements.all;
-      if (!entitlements.containsKey('premium')) {
-        return null;
-      }
+      if (!_initialized) return null;
 
+      final entitlements = _customerInfo.entitlements.all;
       final premium = entitlements['premium'];
-      if (premium == null) {
-        return null;
-      }
-      return premium.expirationDate;
+
+      if (premium == null) return null;
+
+      // expirationDate は String プロパティで ISO 8601 形式
+      final expirationDateStr = premium.expirationDate;
+      if (expirationDateStr == null) return null;
+
+      return DateTime.tryParse(expirationDateStr);
     } catch (_) {
       return null;
     }
   }
 
-  // ── 顧客情報のストリーム（リアクティブ監視） ───────────────────────────────────
+  // ── 顧客情報のストリーム ───────────────────────────────────
   Stream<CustomerInfo> get customerInfoStream {
-    // Purchases.purchaserInfoStream を使用して顧客情報の自動監視
     try {
       return Purchases.customerInfoStream;
     } catch (_) {
-      // customerInfoStream が利用できない場合は、一度きりの情報を流す
-      return Stream.value(_customerInfo);
+      // フォールバック：一度きりのストリーム
+      if (_initialized) {
+        return Stream.value(_customerInfo);
+      }
+      return Stream.empty();
     }
   }
 }
