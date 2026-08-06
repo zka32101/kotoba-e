@@ -142,12 +142,12 @@ class RevenueCatService {
   // ── 顧客情報のストリーム ───────────────────────────────────
   Stream<CustomerInfo> get customerInfoStream {
     try {
-      return Purchases.customerInfoStream;
-    } catch (_) {
-      // フォールバック：一度きりのストリーム
+      // 現在の顧客情報をストリームで返す
       if (_initialized) {
         return Stream.value(_customerInfo);
       }
+      return Stream.empty();
+    } catch (_) {
       return Stream.empty();
     }
   }
