@@ -164,8 +164,3 @@ final selectedLanguageProvider = Provider<String>((ref) {
   return user?.selectedLanguage ?? 'ja';
 });
 
-// Subscription status
-final subscriptionStatusProvider = Provider<String>((ref) {
-  final user = ref.watch(currentUserProvider);
-  return user?.subscriptionStatus ?? 'free';
-});
