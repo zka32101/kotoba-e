@@ -120,7 +120,7 @@ class _PaywallModal extends ConsumerWidget {
                           ),
                         ),
                         child: Text(
-                          featureDescription ?? '',
+                          featureDescription,
                           style: AppTheme.bodySmall.copyWith(
                             color: AppTheme.primary,
                           ),
@@ -198,7 +198,8 @@ class _PaywallModal extends ConsumerWidget {
                   ],
                 ),
               );
-            },
+            );
+          },
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (err, stack) => Center(
             child: Column(
