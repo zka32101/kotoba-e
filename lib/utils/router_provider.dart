@@ -14,6 +14,7 @@ import 'package:kotoba_e/screens/signup_screen.dart';
 import 'package:kotoba_e/screens/stats_screen.dart';
 import 'package:kotoba_e/screens/welcome_screen.dart';
 import 'package:kotoba_e/screens/word_detail_screen.dart';
+import 'package:kotoba_e/screens/paywall_screen.dart';
 
 // Auth 状態に連動して自動リダイレクトする GoRouter。
 // isLoggedInProvider が変化するたびにルーターが再評価される。
@@ -81,6 +82,10 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/home/collection',
             builder: (context, state) => const CollectionScreen(),
+          ),
+          GoRoute(
+            path: '/home/paywall',
+            builder: (context, state) => const PaywallScreen(),
           ),
         ],
       ),
