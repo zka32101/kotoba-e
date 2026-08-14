@@ -14,6 +14,7 @@ import 'package:kotoba_e/screens/stats_screen.dart';
 import 'package:kotoba_e/screens/tree_screen.dart';
 import 'package:kotoba_e/screens/tree_detail_screen.dart';
 import 'package:kotoba_e/screens/daily_word_screen.dart';
+import 'package:kotoba_e/screens/paywall_screen.dart';
 import 'package:kotoba_e/services/local_storage_service.dart';
 
 final appRouter = GoRouter(
@@ -88,6 +89,10 @@ final appRouter = GoRouter(
         GoRoute(
           path: '/home/daily-word',
           builder: (context, state) => const DailyWordScreen(),
+        ),
+        GoRoute(
+          path: '/home/paywall',
+          builder: (context, state) => const PaywallScreen(),
         ),
       ],
     ),

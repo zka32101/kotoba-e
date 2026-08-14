@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kotoba_e/config/theme.dart';
 import 'package:kotoba_e/firebase_options.dart';
 import 'package:kotoba_e/services/local_storage_service.dart';
+import 'package:kotoba_e/services/revenue_cat_service.dart';
 import 'package:kotoba_e/utils/router_provider.dart';
 
 void main() async {
@@ -22,6 +23,14 @@ void main() async {
   } catch (e) {
     // プレースホルダー値のまま起動した場合はオフラインモードで継続
     debugPrint('[Firebase] 初期化スキップ: $e');
+  }
+
+  // RevenueCat 初期化（後でユーザーログイン時に userId を設定）
+  try {
+    await revenueCatService.initialize(userId: 'anonymous');
+    debugPrint('[RevenueCat] 初期化完了');
+  } catch (e) {
+    debugPrint('[RevenueCat] 初期化エラー: $e');
   }
 
   runApp(

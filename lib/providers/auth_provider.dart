@@ -2,6 +2,7 @@ import 'package:riverpod/riverpod.dart';
 import 'package:kotoba_e/models/user_model.dart';
 import 'package:kotoba_e/services/auth_service.dart';
 import 'package:kotoba_e/services/local_storage_service.dart';
+import 'package:kotoba_e/services/revenue_cat_service.dart';
 
 final authServiceProvider = Provider((ref) => authService);
 
@@ -110,6 +111,33 @@ class CurrentUserNotifier extends StateNotifier<UserModel?> {
       rethrow;
     }
   }
+
+  // ── RevenueCat から subscription 情報を同期 ──
+  Future<void> updateSubscriptionFromRevenueCat() async {
+    try {
+      if (state == null) return;
+
+      final customerInfo = await revenueCatService.getCustomerInfo();
+      final status = revenueCatService.getSubscriptionStatusFromCustomerInfo();
+      final expiresAt = revenueCatService.getSubscriptionExpiresAt();
+
+      // ユーザーモデルを更新
+      state = state!.copyWith(
+        subscriptionStatus: status,
+        subscriptionExpiresAt: expiresAt,
+        updatedAt: DateTime.now(),
+      );
+
+      // Firestore にも保存
+      await _authService.updateUserSubscription(
+        subscriptionStatus: status,
+        subscriptionExpiresAt: expiresAt,
+      );
+    } catch (e) {
+      print('Subscription 更新エラー: $e');
+      rethrow;
+    }
+  }
 }
 
 // Auth state
@@ -136,8 +164,3 @@ final selectedLanguageProvider = Provider<String>((ref) {
   return user?.selectedLanguage ?? 'ja';
 });
 
-// Subscription status
-final subscriptionStatusProvider = Provider<String>((ref) {
-  final user = ref.watch(currentUserProvider);
-  return user?.subscriptionStatus ?? 'free';
-});

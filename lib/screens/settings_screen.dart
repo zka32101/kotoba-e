@@ -106,6 +106,17 @@ class SettingsScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 24),
 
+          // ── プレミアム ──
+          _SectionTitle(label: 'プレミアム'),
+          const SizedBox(height: 8),
+          _ActionTile(
+            icon: Icons.star,
+            label: 'サブスクリプション管理',
+            color: AppTheme.primary,
+            onTap: () => context.go('/home/paywall'),
+          ),
+          const SizedBox(height: 20),
+
           // ── アカウント操作 ──
           _SectionTitle(label: 'アカウント'),
           const SizedBox(height: 8),

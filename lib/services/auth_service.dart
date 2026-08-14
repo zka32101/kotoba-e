@@ -142,6 +142,34 @@ class AuthService {
     } catch (_) {}
   }
 
+  // ── Update Subscription ────────────────────────────────
+
+  Future<void> updateUserSubscription({
+    required String subscriptionStatus,
+    required DateTime? subscriptionExpiresAt,
+  }) async {
+    // ローカルに保存
+    await _localStorage.saveSubscriptionStatus(subscriptionStatus);
+
+    // Firebase が利用可能な場合、Firestore に反映
+    try {
+      final fbUser = _auth.currentUser;
+      if (fbUser == null) return;
+
+      await _firestore.updateUser(
+        fbUser.uid,
+        {
+          'subscriptionStatus': subscriptionStatus,
+          if (subscriptionExpiresAt != null)
+            'subscriptionExpiresAt': subscriptionExpiresAt,
+          'updatedAt': DateTime.now(),
+        },
+      );
+    } catch (e) {
+      print('Firestore subscription 更新エラー: $e');
+    }
+  }
+
   // ── Logout ─────────────────────────────────────────────
 
   Future<void> logout() async {
