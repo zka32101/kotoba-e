@@ -60,6 +60,7 @@ class AuthService {
       gradeLevel: gradeLevel,
       selectedLanguage: 'ja',
       subscriptionStatus: 'free',
+      textDisplayMode: 'japanese_furigana',
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     );
@@ -101,6 +102,7 @@ class AuthService {
           gradeLevel: _localStorage.getGradeLevel(),
           selectedLanguage: _localStorage.getSelectedLanguage(),
           subscriptionStatus: _localStorage.getSubscriptionStatus(),
+          textDisplayMode: _localStorage.getTextDisplayMode(),
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
         );
@@ -116,6 +118,7 @@ class AuthService {
     String? selectedLanguage,
     int? gradeLevel,
     String? userType,
+    String? textDisplayMode,
   }) async {
     // ローカルに即反映
     if (displayName != null) await _localStorage.saveDisplayName(displayName);
@@ -124,6 +127,7 @@ class AuthService {
     }
     if (gradeLevel != null) await _localStorage.saveGradeLevel(gradeLevel);
     if (userType != null) await _localStorage.saveUserType(userType);
+    if (textDisplayMode != null) await _localStorage.saveTextDisplayMode(textDisplayMode);
 
     // Firebase が利用可能な場合のみ Firestore に反映
     try {
@@ -135,6 +139,7 @@ class AuthService {
       if (selectedLanguage != null) updates['selectedLanguage'] = selectedLanguage;
       if (gradeLevel != null) updates['gradeLevel'] = gradeLevel;
       if (userType != null) updates['userType'] = userType;
+      if (textDisplayMode != null) updates['textDisplayMode'] = textDisplayMode;
       if (updates.isNotEmpty) {
         await _firestore.updateUser(fbUser.uid, updates);
         if (displayName != null) await fbUser.updateDisplayName(displayName);
@@ -193,6 +198,7 @@ class AuthService {
     await _localStorage.saveGradeLevel(user.gradeLevel);
     await _localStorage.saveSelectedLanguage(user.selectedLanguage);
     await _localStorage.saveSubscriptionStatus(user.subscriptionStatus);
+    await _localStorage.saveTextDisplayMode(user.textDisplayMode);
     await _localStorage.setLoggedIn(true);
   }
 
@@ -205,6 +211,7 @@ class AuthService {
       gradeLevel: _localStorage.getGradeLevel(),
       selectedLanguage: _localStorage.getSelectedLanguage(),
       subscriptionStatus: _localStorage.getSubscriptionStatus(),
+      textDisplayMode: _localStorage.getTextDisplayMode(),
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     );

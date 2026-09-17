@@ -57,6 +57,8 @@ class WordDataService {
       nuanceExplanations: nuance,
       illustrationPlaceholder: j['color'] as String? ?? '#F5F5F5',
       frequency: j['freq'] as int? ?? 50,
+      jlptLevel: j['jlptLevel'] as String?,
+      romaji: j['romaji'] as String?,
       createdAt: DateTime(2026, 1, 1),
       updatedAt: DateTime(2026, 1, 1),
     );

@@ -13,6 +13,7 @@ class SettingsScreen extends ConsumerWidget {
     final language = ref.watch(selectedLanguageProvider);
     final gradeLevel = ref.watch(gradeLevelProvider);
     final userType = ref.watch(userTypeProvider);
+    final textDisplayMode = ref.watch(textDisplayModeProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('設定'), elevation: 0),
@@ -86,6 +87,16 @@ class SettingsScreen extends ConsumerWidget {
             onChanged: (v) => ref.read(currentUserProvider.notifier).updateProfile(userType: v),
           ),
           const SizedBox(height: 20),
+
+          // ── 表示モード（グローバル向け）──
+          if (userType == 'global') ...[
+            _SectionTitle(label: '表記法'),
+            _TextDisplayModeSelector(
+              selected: textDisplayMode,
+              onChanged: (v) => ref.read(currentUserProvider.notifier).updateProfile(textDisplayMode: v),
+            ),
+            const SizedBox(height: 20),
+          ],
 
           // ── 学年設定 ──
           _SectionTitle(label: '学年 / レベル'),
@@ -214,6 +225,111 @@ class _ActionTile extends StatelessWidget {
             Text(label, style: TextStyle(color: color, fontWeight: FontWeight.w500)),
             const Spacer(),
             const Icon(Icons.chevron_right, color: AppTheme.textSecondary, size: 18),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _TextDisplayModeSelector extends StatelessWidget {
+  final String selected;
+  final ValueChanged<String> onChanged;
+
+  const _TextDisplayModeSelector({
+    required this.selected,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        _TextDisplayModeOption(
+          label: '日本語のみ',
+          value: 'japanese_only',
+          selected: selected == 'japanese_only',
+          onTap: () => onChanged('japanese_only'),
+        ),
+        const SizedBox(height: 8),
+        _TextDisplayModeOption(
+          label: '日本語 + ふりがな',
+          value: 'japanese_furigana',
+          selected: selected == 'japanese_furigana',
+          onTap: () => onChanged('japanese_furigana'),
+        ),
+        const SizedBox(height: 8),
+        _TextDisplayModeOption(
+          label: 'ふりがな + ローマ字',
+          value: 'furigana_romaji',
+          selected: selected == 'furigana_romaji',
+          onTap: () => onChanged('furigana_romaji'),
+        ),
+        const SizedBox(height: 8),
+        _TextDisplayModeOption(
+          label: 'ローマ字のみ',
+          value: 'romaji_only',
+          selected: selected == 'romaji_only',
+          onTap: () => onChanged('romaji_only'),
+        ),
+      ],
+    );
+  }
+}
+
+class _TextDisplayModeOption extends StatelessWidget {
+  final String label;
+  final String value;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _TextDisplayModeOption({
+    required this.label,
+    required this.value,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: selected ? AppTheme.primary.withValues(alpha: 0.1) : Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: selected ? AppTheme.primary : AppTheme.divider,
+            width: selected ? 2 : 1,
+          ),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 20,
+              height: 20,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: selected ? AppTheme.primary : AppTheme.textSecondary),
+                color: selected ? AppTheme.primary : Colors.transparent,
+              ),
+              child: selected
+                  ? const Icon(Icons.check, size: 12, color: Colors.white)
+                  : null,
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                label,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
+                  color: selected ? AppTheme.primary : AppTheme.textPrimary,
+                  fontFamily: 'NotoSansJP',
+                ),
+              ),
+            ),
           ],
         ),
       ),
