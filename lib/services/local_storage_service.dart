@@ -9,6 +9,7 @@ class LocalStorageService {
   static const String _gradeLevelKey = 'grade_level';
   static const String _selectedLanguageKey = 'selected_language';
   static const String _subscriptionStatusKey = 'subscription_status';
+  static const String _textDisplayModeKey = 'text_display_mode';
   static const String _isLoggedInKey = 'is_logged_in';
 
   late SharedPreferences _prefs;
@@ -61,6 +62,13 @@ class LocalStorageService {
 
   String getSelectedLanguage() =>
       _prefs.getString(_selectedLanguageKey) ?? 'ja';
+
+  Future<void> saveTextDisplayMode(String mode) async {
+    await _prefs.setString(_textDisplayModeKey, mode);
+  }
+
+  String getTextDisplayMode() =>
+      _prefs.getString(_textDisplayModeKey) ?? 'japanese_furigana';
 
   // Subscription
   Future<void> saveSubscriptionStatus(String status) async {

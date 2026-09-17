@@ -36,6 +36,7 @@ class CurrentUserNotifier extends StateNotifier<UserModel?> {
       gradeLevel: 3,
       selectedLanguage: 'ja',
       subscriptionStatus: 'free',
+      textDisplayMode: 'japanese_furigana',
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     );
@@ -91,6 +92,7 @@ class CurrentUserNotifier extends StateNotifier<UserModel?> {
     String? selectedLanguage,
     int? gradeLevel,
     String? userType,
+    String? textDisplayMode,
   }) async {
     try {
       await _authService.updateUserProfile(
@@ -98,6 +100,7 @@ class CurrentUserNotifier extends StateNotifier<UserModel?> {
         selectedLanguage: selectedLanguage,
         gradeLevel: gradeLevel,
         userType: userType,
+        textDisplayMode: textDisplayMode,
       );
       if (state != null) {
         state = state!.copyWith(
@@ -105,6 +108,7 @@ class CurrentUserNotifier extends StateNotifier<UserModel?> {
           selectedLanguage: selectedLanguage ?? state!.selectedLanguage,
           gradeLevel: gradeLevel ?? state!.gradeLevel,
           userType: userType ?? state!.userType,
+          textDisplayMode: textDisplayMode ?? state!.textDisplayMode,
         );
       }
     } catch (e) {
@@ -162,5 +166,11 @@ final gradeLevelProvider = Provider<int>((ref) {
 final selectedLanguageProvider = Provider<String>((ref) {
   final user = ref.watch(currentUserProvider);
   return user?.selectedLanguage ?? 'ja';
+});
+
+// Text display mode
+final textDisplayModeProvider = Provider<String>((ref) {
+  final user = ref.watch(currentUserProvider);
+  return user?.textDisplayMode ?? 'japanese_furigana';
 });
 

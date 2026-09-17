@@ -472,12 +472,51 @@ class _WordHeader extends StatelessWidget {
                 style: AppTheme.bodySmall,
               ),
             ),
+            if (word.jlptLevel != null) ...[
+              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: _getJlptLevelColor(word.jlptLevel!),
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(color: _getJlptLevelBorderColor(word.jlptLevel!)),
+                ),
+                child: Text(
+                  'JLPT ${word.jlptLevel}',
+                  style: AppTheme.bodySmall.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
           ],
         ),
         const SizedBox(height: 6),
         Text(word.furigana, style: AppTheme.bodyLarge.copyWith(color: AppTheme.textSecondary)),
       ],
     );
+  }
+
+  Color _getJlptLevelColor(String level) {
+    switch (level) {
+      case 'N5':
+        return const Color(0xFF4CAF50); // Green
+      case 'N4':
+        return const Color(0xFF2196F3); // Blue
+      case 'N3':
+        return const Color(0xFFFF9800); // Orange
+      case 'N2':
+        return const Color(0xFFF44336); // Red
+      case 'N1':
+        return const Color(0xFF9C27B0); // Purple
+      default:
+        return AppTheme.textSecondary;
+    }
+  }
+
+  Color _getJlptLevelBorderColor(String level) {
+    return _getJlptLevelColor(level).withOpacity(0.3);
   }
 }
 

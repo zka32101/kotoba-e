@@ -14,6 +14,7 @@ class UserModel with _$UserModel {
     @Default('ja') String selectedLanguage, // ja | en
     @Default('free') String subscriptionStatus, // free | premium_monthly | premium_yearly
     DateTime? subscriptionExpiresAt,
+    @Default('japanese_furigana') String textDisplayMode, // japanese_only | japanese_furigana | furigana_romaji | romaji_only
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _UserModel;
