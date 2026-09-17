@@ -31,6 +31,8 @@ mixin _$WordModel {
   String? get illustrationUrl => throw _privateConstructorUsedError;
   String get illustrationPlaceholder => throw _privateConstructorUsedError;
   int get frequency => throw _privateConstructorUsedError;
+  String? get jlptLevel => throw _privateConstructorUsedError;
+  String? get romaji => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
@@ -59,6 +61,8 @@ abstract class $WordModelCopyWith<$Res> {
       String? illustrationUrl,
       String illustrationPlaceholder,
       int frequency,
+      String? jlptLevel,
+      String? romaji,
       DateTime createdAt,
       DateTime updatedAt});
 }
@@ -87,6 +91,8 @@ class _$WordModelCopyWithImpl<$Res, $Val extends WordModel>
     Object? illustrationUrl = freezed,
     Object? illustrationPlaceholder = null,
     Object? frequency = null,
+    Object? jlptLevel = freezed,
+    Object? romaji = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -127,6 +133,14 @@ class _$WordModelCopyWithImpl<$Res, $Val extends WordModel>
           ? _value.frequency
           : frequency // ignore: cast_nullable_to_non_nullable
               as int,
+      jlptLevel: freezed == jlptLevel
+          ? _value.jlptLevel
+          : jlptLevel // ignore: cast_nullable_to_non_nullable
+              as String?,
+      romaji: freezed == romaji
+          ? _value.romaji
+          : romaji // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -157,6 +171,8 @@ abstract class _$$WordModelImplCopyWith<$Res>
       String? illustrationUrl,
       String illustrationPlaceholder,
       int frequency,
+      String? jlptLevel,
+      String? romaji,
       DateTime createdAt,
       DateTime updatedAt});
 }
@@ -183,6 +199,8 @@ class __$$WordModelImplCopyWithImpl<$Res>
     Object? illustrationUrl = freezed,
     Object? illustrationPlaceholder = null,
     Object? frequency = null,
+    Object? jlptLevel = freezed,
+    Object? romaji = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -223,6 +241,14 @@ class __$$WordModelImplCopyWithImpl<$Res>
           ? _value.frequency
           : frequency // ignore: cast_nullable_to_non_nullable
               as int,
+      jlptLevel: freezed == jlptLevel
+          ? _value.jlptLevel
+          : jlptLevel // ignore: cast_nullable_to_non_nullable
+              as String?,
+      romaji: freezed == romaji
+          ? _value.romaji
+          : romaji // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -248,6 +274,8 @@ class _$WordModelImpl implements _WordModel {
       this.illustrationUrl,
       this.illustrationPlaceholder = '#F5F5F5',
       this.frequency = 0,
+      this.jlptLevel,
+      this.romaji,
       required this.createdAt,
       required this.updatedAt})
       : _descriptions = descriptions,
@@ -294,13 +322,17 @@ class _$WordModelImpl implements _WordModel {
   @JsonKey()
   final int frequency;
   @override
+  final String? jlptLevel;
+  @override
+  final String? romaji;
+  @override
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'WordModel(wordId: $wordId, wordName: $wordName, furigana: $furigana, partsOfSpeech: $partsOfSpeech, descriptions: $descriptions, nuanceExplanations: $nuanceExplanations, illustrationUrl: $illustrationUrl, illustrationPlaceholder: $illustrationPlaceholder, frequency: $frequency, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'WordModel(wordId: $wordId, wordName: $wordName, furigana: $furigana, partsOfSpeech: $partsOfSpeech, descriptions: $descriptions, nuanceExplanations: $nuanceExplanations, illustrationUrl: $illustrationUrl, illustrationPlaceholder: $illustrationPlaceholder, frequency: $frequency, jlptLevel: $jlptLevel, romaji: $romaji, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -326,6 +358,9 @@ class _$WordModelImpl implements _WordModel {
                 other.illustrationPlaceholder == illustrationPlaceholder) &&
             (identical(other.frequency, frequency) ||
                 other.frequency == frequency) &&
+            (identical(other.jlptLevel, jlptLevel) ||
+                other.jlptLevel == jlptLevel) &&
+            (identical(other.romaji, romaji) || other.romaji == romaji) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -345,6 +380,8 @@ class _$WordModelImpl implements _WordModel {
       illustrationUrl,
       illustrationPlaceholder,
       frequency,
+      jlptLevel,
+      romaji,
       createdAt,
       updatedAt);
 
@@ -375,6 +412,8 @@ abstract class _WordModel implements WordModel {
       final String? illustrationUrl,
       final String illustrationPlaceholder,
       final int frequency,
+      final String? jlptLevel,
+      final String? romaji,
       required final DateTime createdAt,
       required final DateTime updatedAt}) = _$WordModelImpl;
 
@@ -399,6 +438,10 @@ abstract class _WordModel implements WordModel {
   String get illustrationPlaceholder;
   @override
   int get frequency;
+  @override
+  String? get jlptLevel;
+  @override
+  String? get romaji;
   @override
   DateTime get createdAt;
   @override

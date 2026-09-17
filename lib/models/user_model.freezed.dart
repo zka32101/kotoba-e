@@ -30,6 +30,7 @@ mixin _$UserModel {
   String get subscriptionStatus =>
       throw _privateConstructorUsedError; // free | premium_monthly | premium_yearly
   DateTime? get subscriptionExpiresAt => throw _privateConstructorUsedError;
+  String get textDisplayMode => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
@@ -57,6 +58,7 @@ abstract class $UserModelCopyWith<$Res> {
       String selectedLanguage,
       String subscriptionStatus,
       DateTime? subscriptionExpiresAt,
+      String textDisplayMode,
       DateTime createdAt,
       DateTime updatedAt});
 }
@@ -84,6 +86,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? selectedLanguage = null,
     Object? subscriptionStatus = null,
     Object? subscriptionExpiresAt = freezed,
+    Object? textDisplayMode = null,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -120,6 +123,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.subscriptionExpiresAt
           : subscriptionExpiresAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      textDisplayMode: null == textDisplayMode
+          ? _value.textDisplayMode
+          : textDisplayMode // ignore: cast_nullable_to_non_nullable
+              as String,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -130,7 +137,6 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
               as DateTime,
     ) as $Val);
   }
-}
 
 /// @nodoc
 abstract class _$$UserModelImplCopyWith<$Res>
@@ -149,6 +155,7 @@ abstract class _$$UserModelImplCopyWith<$Res>
       String selectedLanguage,
       String subscriptionStatus,
       DateTime? subscriptionExpiresAt,
+      String textDisplayMode,
       DateTime createdAt,
       DateTime updatedAt});
 }
@@ -174,6 +181,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? selectedLanguage = null,
     Object? subscriptionStatus = null,
     Object? subscriptionExpiresAt = freezed,
+    Object? textDisplayMode = null,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -210,6 +218,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.subscriptionExpiresAt
           : subscriptionExpiresAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      textDisplayMode: null == textDisplayMode
+          ? _value.textDisplayMode
+          : textDisplayMode // ignore: cast_nullable_to_non_nullable
+              as String,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -234,6 +246,7 @@ class _$UserModelImpl implements _UserModel {
       this.selectedLanguage = 'ja',
       this.subscriptionStatus = 'free',
       this.subscriptionExpiresAt,
+      this.textDisplayMode = 'japanese_furigana',
       required this.createdAt,
       required this.updatedAt});
 
@@ -264,13 +277,16 @@ class _$UserModelImpl implements _UserModel {
   @override
   final DateTime? subscriptionExpiresAt;
   @override
+  @JsonKey()
+  final String textDisplayMode;
+  @override
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'UserModel(userId: $userId, email: $email, displayName: $displayName, userType: $userType, gradeLevel: $gradeLevel, selectedLanguage: $selectedLanguage, subscriptionStatus: $subscriptionStatus, subscriptionExpiresAt: $subscriptionExpiresAt, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserModel(userId: $userId, email: $email, displayName: $displayName, userType: $userType, gradeLevel: $gradeLevel, selectedLanguage: $selectedLanguage, subscriptionStatus: $subscriptionStatus, subscriptionExpiresAt: $subscriptionExpiresAt, textDisplayMode: $textDisplayMode, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -292,6 +308,8 @@ class _$UserModelImpl implements _UserModel {
                 other.subscriptionStatus == subscriptionStatus) &&
             (identical(other.subscriptionExpiresAt, subscriptionExpiresAt) ||
                 other.subscriptionExpiresAt == subscriptionExpiresAt) &&
+            (identical(other.textDisplayMode, textDisplayMode) ||
+                other.textDisplayMode == textDisplayMode) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -310,6 +328,7 @@ class _$UserModelImpl implements _UserModel {
       selectedLanguage,
       subscriptionStatus,
       subscriptionExpiresAt,
+      textDisplayMode,
       createdAt,
       updatedAt);
 
@@ -339,6 +358,7 @@ abstract class _UserModel implements UserModel {
       final String selectedLanguage,
       final String subscriptionStatus,
       final DateTime? subscriptionExpiresAt,
+      final String textDisplayMode,
       required final DateTime createdAt,
       required final DateTime updatedAt}) = _$UserModelImpl;
 
@@ -361,6 +381,8 @@ abstract class _UserModel implements UserModel {
   String get subscriptionStatus; // free | premium_monthly | premium_yearly
   @override
   DateTime? get subscriptionExpiresAt;
+  @override
+  String get textDisplayMode;
   @override
   DateTime get createdAt;
   @override
