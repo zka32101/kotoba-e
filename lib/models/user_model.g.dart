@@ -18,6 +18,7 @@ _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
       subscriptionExpiresAt: json['subscriptionExpiresAt'] == null
           ? null
           : DateTime.parse(json['subscriptionExpiresAt'] as String),
+      textDisplayMode: json['textDisplayMode'] as String? ?? 'japanese_furigana',
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
@@ -33,6 +34,7 @@ Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
       'subscriptionStatus': instance.subscriptionStatus,
       'subscriptionExpiresAt':
           instance.subscriptionExpiresAt?.toIso8601String(),
+      'textDisplayMode': instance.textDisplayMode,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
     };

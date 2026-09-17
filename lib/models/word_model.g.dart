@@ -23,6 +23,8 @@ _$WordModelImpl _$$WordModelImplFromJson(Map<String, dynamic> json) =>
       illustrationPlaceholder:
           json['illustrationPlaceholder'] as String? ?? '#F5F5F5',
       frequency: (json['frequency'] as num?)?.toInt() ?? 0,
+      jlptLevel: json['jlptLevel'] as String?,
+      romaji: json['romaji'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
@@ -38,6 +40,8 @@ Map<String, dynamic> _$$WordModelImplToJson(_$WordModelImpl instance) =>
       'illustrationUrl': instance.illustrationUrl,
       'illustrationPlaceholder': instance.illustrationPlaceholder,
       'frequency': instance.frequency,
+      'jlptLevel': instance.jlptLevel,
+      'romaji': instance.romaji,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
     };
