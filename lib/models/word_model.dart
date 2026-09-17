@@ -15,6 +15,8 @@ class WordModel with _$WordModel {
     String? illustrationUrl,
     @Default('#F5F5F5') String illustrationPlaceholder,
     @Default(0) int frequency,
+    String? jlptLevel, // N1, N2, N3, N4, N5 (for global learners)
+    String? romaji, // Romanized version for beginners
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _WordModel;
