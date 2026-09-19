@@ -112,6 +112,7 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
+      fontFamily: 'NotoSansJP',
       primaryColor: primary,
       scaffoldBackgroundColor: background,
       splashColor: primary.withOpacity(0.08),
