@@ -2,6 +2,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kotoba_e/config/theme.dart';
+import 'package:kotoba_e/l10n/app_strings.dart';
 import 'package:kotoba_e/providers/auth_provider.dart';
 
 class SettingsScreen extends ConsumerWidget {
@@ -14,9 +15,10 @@ class SettingsScreen extends ConsumerWidget {
     final gradeLevel = ref.watch(gradeLevelProvider);
     final userType = ref.watch(userTypeProvider);
     final textDisplayMode = ref.watch(textDisplayModeProvider);
+    final t = ref.watch(appStringsProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('設定'), elevation: 0),
+      appBar: AppBar(title: Text(t('settings_title')), elevation: 0),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -44,7 +46,7 @@ class SettingsScreen extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(user.displayName ?? 'ゲスト', style: AppTheme.heading3),
+                        Text(user.displayName ?? t('settings_guest'), style: AppTheme.heading3),
                         Text(user.email, style: AppTheme.bodySmall),
                         const SizedBox(height: 4),
                         Container(
@@ -54,7 +56,7 @@ class SettingsScreen extends ConsumerWidget {
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
-                            user.subscriptionStatus == 'free' ? '無料プラン' : 'プレミアム',
+                            user.subscriptionStatus == 'free' ? t('settings_plan_free') : t('settings_plan_premium'),
                             style: TextStyle(
                               fontSize: 11,
                               color: user.subscriptionStatus == 'free' ? AppTheme.textSecondary : AppTheme.success,
@@ -71,7 +73,7 @@ class SettingsScreen extends ConsumerWidget {
           const SizedBox(height: 24),
 
           // ── 言語設定 ──
-          _SectionTitle(label: '言語'),
+          _SectionTitle(label: t('settings_section_language')),
           _SegmentRow(
             options: const [('日本語', 'ja'), ('English', 'en')],
             selected: language,
@@ -80,9 +82,12 @@ class SettingsScreen extends ConsumerWidget {
           const SizedBox(height: 20),
 
           // ── ユーザータイプ ──
-          _SectionTitle(label: 'ユーザータイプ'),
+          _SectionTitle(label: t('settings_section_user_type')),
           _SegmentRow(
-            options: const [('国内向け', 'domestic'), ('グローバル', 'global')],
+            options: [
+              (t('settings_user_type_domestic'), 'domestic'),
+              (t('settings_user_type_global'), 'global'),
+            ],
             selected: userType,
             onChanged: (v) => ref.read(currentUserProvider.notifier).updateProfile(userType: v),
           ),
@@ -90,7 +95,7 @@ class SettingsScreen extends ConsumerWidget {
 
           // ── 表示モード（グローバル向け）──
           if (userType == 'global') ...[
-            _SectionTitle(label: '表記法'),
+            _SectionTitle(label: t('settings_section_text_display')),
             _TextDisplayModeSelector(
               selected: textDisplayMode,
               onChanged: (v) => ref.read(currentUserProvider.notifier).updateProfile(textDisplayMode: v),
@@ -99,17 +104,17 @@ class SettingsScreen extends ConsumerWidget {
           ],
 
           // ── 学年設定 ──
-          _SectionTitle(label: '学年 / レベル'),
+          _SectionTitle(label: t('settings_section_grade')),
           Row(
             children: [
-              Text('$gradeLevel年生', style: AppTheme.heading3.copyWith(color: AppTheme.primary)),
+              Text('$gradeLevel${t('settings_grade_suffix')}', style: AppTheme.heading3.copyWith(color: AppTheme.primary)),
               Expanded(
                 child: Slider(
                   value: gradeLevel.toDouble(),
                   min: 1,
                   max: 6,
                   divisions: 5,
-                  label: '$gradeLevel年生',
+                  label: '$gradeLevel${t('settings_grade_suffix')}',
                   onChanged: (v) => ref.read(currentUserProvider.notifier).updateProfile(gradeLevel: v.toInt()),
                 ),
               ),
@@ -118,22 +123,22 @@ class SettingsScreen extends ConsumerWidget {
           const SizedBox(height: 24),
 
           // ── プレミアム ──
-          _SectionTitle(label: 'プレミアム'),
+          _SectionTitle(label: t('settings_section_premium')),
           const SizedBox(height: 8),
           _ActionTile(
             icon: Icons.star,
-            label: 'サブスクリプション管理',
+            label: t('settings_manage_subscription'),
             color: AppTheme.primary,
             onTap: () => context.go('/home/paywall'),
           ),
           const SizedBox(height: 20),
 
           // ── アカウント操作 ──
-          _SectionTitle(label: 'アカウント'),
+          _SectionTitle(label: t('settings_section_account')),
           const SizedBox(height: 8),
           _ActionTile(
             icon: Icons.logout,
-            label: 'ログアウト',
+            label: t('settings_logout'),
             color: AppTheme.error,
             onTap: () async {
               await ref.read(currentUserProvider.notifier).logout();
@@ -143,7 +148,7 @@ class SettingsScreen extends ConsumerWidget {
           const SizedBox(height: 8),
           _ActionTile(
             icon: Icons.info_outline,
-            label: 'バージョン 1.0.0',
+            label: t('settings_version'),
             color: AppTheme.textSecondary,
             onTap: () {},
           ),
