@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kotoba_e/config/theme.dart';
+import 'package:kotoba_e/l10n/app_strings.dart';
 
-class ShellScreen extends StatelessWidget {
+class ShellScreen extends ConsumerWidget {
   final Widget child;
 
   const ShellScreen({super.key, required this.child});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final t = ref.watch(appStringsProvider);
+
     return Scaffold(
       body: child,
       bottomNavigationBar: BottomNavigationBar(
@@ -17,26 +21,26 @@ class ShellScreen extends StatelessWidget {
         backgroundColor: AppTheme.surface,
         elevation: 8,
         type: BottomNavigationBarType.fixed,
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'ホーム',
+            icon: const Icon(Icons.home),
+            label: t('nav_home'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: '検索',
+            icon: const Icon(Icons.search),
+            label: t('nav_search'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.quiz),
-            label: 'クイズ',
+            icon: const Icon(Icons.quiz),
+            label: t('nav_quiz'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.nature),
-            label: 'ツリー',
+            icon: const Icon(Icons.nature),
+            label: t('nav_tree'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark),
-            label: 'マイ単語',
+            icon: const Icon(Icons.bookmark),
+            label: t('nav_favorites'),
           ),
         ],
       ),
