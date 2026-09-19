@@ -79,6 +79,12 @@ class _BookmarkList extends StatelessWidget {
             const Text('お気に入りがありません', style: AppTheme.heading3),
             const SizedBox(height: 8),
             const Text('単語詳細から追加してください', style: AppTheme.bodySmall),
+            const SizedBox(height: 20),
+            ElevatedButton.icon(
+              onPressed: () => context.go('/home/search'),
+              icon: const Icon(Icons.search),
+              label: const Text('単語を探す'),
+            ),
           ],
         ),
       );
