@@ -375,7 +375,7 @@ git push origin feature/word-search
 ## ⚠️ 次の TODO
 
 - [ ] Firebase 本番接続（flutterfire configure）
-- [ ] NotoSansJP フォント asset 追加（pubspec.yaml） ← **優先度最高**
+- [x] ~~NotoSansJP フォント asset 追加（pubspec.yaml）~~ ✅ **2026-09-19 完了**
 - [x] ~~RevenueCat 統合（課金管理）~~ ✅ **2026-08-14 完了**
 - [ ] FCM プッシュ通知実装
 - [ ] APK 再ビルド（firebase_options.dart 置き換え後）
