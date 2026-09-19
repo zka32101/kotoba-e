@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kotoba_e/data/mock_words.dart';
 import 'package:kotoba_e/models/word_model.dart';
+import 'package:kotoba_e/providers/bookmark_provider.dart';
 import 'package:kotoba_e/services/local_storage_service.dart';
 import 'package:kotoba_e/services/word_data_service.dart';
 import 'package:kotoba_e/services/word_index.dart';
@@ -102,6 +103,43 @@ final relatedWordsProvider =
     FutureProvider.family<List<WordModel>, String>((ref, wordId) async {
   final index = await ref.watch(wordIndexProvider.future);
   return index.relatedTo(wordId);
+});
+
+/// マイ単語（ブックマーク）のカテゴリから、まだ追加していない関連単語を提案（最大8件）
+/// 「お気に入り」画面で語彙の幅を広げる提案に使用
+final suggestedRelatedWordsProvider =
+    FutureProvider<List<WordModel>>((ref) async {
+  final bookmarks = ref.watch(bookmarksProvider);
+  if (bookmarks.isEmpty) return [];
+
+  final index = await ref.watch(wordIndexProvider.future);
+  final bookmarkedIds = bookmarks.map((b) => b.wordId).toSet();
+  final categories = bookmarkedIds.map(index.categoryOf).toSet();
+
+  final suggestions = <WordModel>[];
+  for (final cat in categories) {
+    for (final w in index.byCategory(cat)) {
+      if (bookmarkedIds.contains(w.wordId)) continue;
+      if (suggestions.any((s) => s.wordId == w.wordId)) continue;
+      suggestions.add(w);
+      if (suggestions.length >= 8) break;
+    }
+    if (suggestions.length >= 8) break;
+  }
+  return suggestions;
+});
+
+/// 検索結果が0件の時の代替提案
+/// カテゴリ選択中ならそのカテゴリの単語、未選択なら人気（頻度順）単語
+final searchFallbackSuggestionsProvider =
+    FutureProvider<List<WordModel>>((ref) async {
+  final index = await ref.watch(wordIndexProvider.future);
+  final category = ref.watch(selectedCategoryProvider);
+  if (category != null) {
+    return index.byCategory(category).take(8).toList();
+  }
+  final all = await ref.watch(allWordsProvider.future);
+  return all.take(8).toList();
 });
 
 // ─── 漢字逆引き ───────────────────────────────────────────────

@@ -3,8 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kotoba_e/config/theme.dart';
 import 'package:kotoba_e/models/bookmark_model.dart';
+import 'package:kotoba_e/models/word_model.dart';
+import 'package:kotoba_e/providers/auth_provider.dart';
 import 'package:kotoba_e/providers/bookmark_provider.dart';
 import 'package:kotoba_e/providers/srs_provider.dart';
+import 'package:kotoba_e/providers/word_provider.dart';
 
 class FavoritesScreen extends ConsumerWidget {
   const FavoritesScreen({super.key});
@@ -34,18 +37,147 @@ class FavoritesScreen extends ConsumerWidget {
             tabs: tabItems.map((t) => Tab(text: t.label)).toList(),
           ),
         ),
-        body: TabBarView(
-          children: tabItems.map((t) {
-            final filtered = ref.watch(bookmarksByStatusProvider(t.status));
-            return _BookmarkList(
-              bookmarks: filtered,
-              dueIds: dueIds,
-              onTap: (wordId) => context.go('/home/word/$wordId'),
-              onRemove: (wordId) => ref.read(bookmarksProvider.notifier).removeBookmark(wordId),
-              onStatusChange: (wordId, status) =>
-                  ref.read(bookmarksProvider.notifier).updateStatus(wordId, status),
-            );
-          }).toList(),
+        body: Column(
+          children: [
+            const _SuggestedRelatedWords(),
+            Expanded(
+              child: TabBarView(
+                children: tabItems.map((t) {
+                  final filtered = ref.watch(bookmarksByStatusProvider(t.status));
+                  return _BookmarkList(
+                    bookmarks: filtered,
+                    dueIds: dueIds,
+                    onTap: (wordId) => context.go('/home/word/$wordId'),
+                    onRemove: (wordId) => ref.read(bookmarksProvider.notifier).removeBookmark(wordId),
+                    onStatusChange: (wordId, status) =>
+                        ref.read(bookmarksProvider.notifier).updateStatus(wordId, status),
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// おすすめの関連単語
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+class _SuggestedRelatedWords extends ConsumerWidget {
+  const _SuggestedRelatedWords();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final suggestions = ref.watch(suggestedRelatedWordsProvider);
+
+    return suggestions.when(
+      loading: () => const SizedBox.shrink(),
+      error: (_, __) => const SizedBox.shrink(),
+      data: (words) {
+        if (words.isEmpty) return const SizedBox.shrink();
+        final user = ref.watch(currentUserProvider);
+
+        return Container(
+          padding: const EdgeInsets.only(top: 12, bottom: 4),
+          decoration: const BoxDecoration(
+            border: Border(bottom: BorderSide(color: AppTheme.divider)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Text('おすすめの関連単語', style: AppTheme.bodySmall),
+              ),
+              const SizedBox(height: 8),
+              SizedBox(
+                height: 78,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  itemCount: words.length,
+                  separatorBuilder: (_, __) => const SizedBox(width: 8),
+                  itemBuilder: (_, i) {
+                    final word = words[i];
+                    return _SuggestedWordCard(
+                      word: word,
+                      onTap: () => context.go('/home/word/${word.wordId}'),
+                      onAdd: () {
+                        ref.read(bookmarksProvider.notifier).addBookmark(
+                              userId: user?.userId ?? 'guest',
+                              wordId: word.wordId,
+                              wordName: word.wordName,
+                            );
+                        ref.read(srsProvider.notifier).initWord(word.wordId);
+                      },
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 8),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _SuggestedWordCard extends StatelessWidget {
+  final WordModel word;
+  final VoidCallback onTap;
+  final VoidCallback onAdd;
+
+  const _SuggestedWordCard({
+    required this.word,
+    required this.onTap,
+    required this.onAdd,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 130,
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+        decoration: BoxDecoration(
+          color: AppTheme.surface,
+          borderRadius: BorderRadius.circular(AppTheme.radiusMedium),
+          border: Border.all(color: AppTheme.divider),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    word.wordName,
+                    style: AppTheme.bodyMedium,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    word.furigana,
+                    style: AppTheme.bodySmall,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+            IconButton(
+              icon: const Icon(Icons.add_circle, color: AppTheme.primary, size: 22),
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(),
+              onPressed: onAdd,
+            ),
+          ],
         ),
       ),
     );

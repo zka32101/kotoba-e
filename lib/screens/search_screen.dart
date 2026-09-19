@@ -32,6 +32,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
     // 検索結果を取得
     final searchResults = ref.watch(searchResultsProvider);
+    final fallbackSuggestions = ref.watch(searchFallbackSuggestionsProvider);
 
     // カテゴリでフィルター
     final filteredResults = searchResults.whenData((words) {
@@ -121,22 +122,50 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               error: (e, _) => Center(child: Text('エラー: $e')),
               data: (words) {
                 if (words.isEmpty) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.search_off,
-                            size: 64, color: AppTheme.textSecondary),
-                        const SizedBox(height: 16),
-                        Text(
+                  return ListView(
+                    padding: const EdgeInsets.symmetric(vertical: 32),
+                    children: [
+                      const Icon(Icons.search_off,
+                          size: 64, color: AppTheme.textSecondary),
+                      const SizedBox(height: 16),
+                      Center(
+                        child: Text(
                           searchQuery.isEmpty
                               ? 'カテゴリから検索してください'
                               : '「$searchQuery」は見つかりませんでした',
                           style: AppTheme.bodyMedium
                               .copyWith(color: AppTheme.textSecondary),
+                          textAlign: TextAlign.center,
                         ),
-                      ],
-                    ),
+                      ),
+                      if (searchQuery.isNotEmpty)
+                        fallbackSuggestions.when(
+                          loading: () => const SizedBox.shrink(),
+                          error: (_, __) => const SizedBox.shrink(),
+                          data: (suggestions) {
+                            if (suggestions.isEmpty) return const SizedBox.shrink();
+                            return Padding(
+                              padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text('こんな言葉はいかがですか？', style: AppTheme.bodySmall),
+                                  const SizedBox(height: 8),
+                                  ...suggestions.map((w) => Padding(
+                                        padding: const EdgeInsets.only(bottom: 8),
+                                        child: _WordTile(
+                                          word: w,
+                                          language: language,
+                                          gradeLevel: gradeLevel,
+                                          onTap: () => context.go('/home/word/${w.wordId}'),
+                                        ),
+                                      )),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                    ],
                   );
                 }
                 return ListView.separated(
