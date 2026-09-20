@@ -1,3 +1,4 @@
+import 'dart:io' show Platform;
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 /// RevenueCat サービス（簡易実装版）
@@ -15,8 +16,9 @@ class RevenueCatService {
     if (_initialized) return;
 
     try {
+      final apiKey = Platform.isIOS ? _iosApiKey : _androidApiKey;
       await Purchases.configure(
-        PurchasesConfiguration(_iosApiKey),
+        PurchasesConfiguration(apiKey),
       );
       _initialized = true;
       await setUserId(userId);
