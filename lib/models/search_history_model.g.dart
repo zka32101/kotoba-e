@@ -6,9 +6,8 @@ part of 'search_history_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$SearchHistoryModelImpl _$$SearchHistoryModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$SearchHistoryModelImpl(
+_SearchHistoryModel _$SearchHistoryModelFromJson(Map<String, dynamic> json) =>
+    _SearchHistoryModel(
       searchHistoryId: json['searchHistoryId'] as String,
       userId: json['userId'] as String,
       wordId: json['wordId'] as String,
@@ -22,8 +21,7 @@ _$SearchHistoryModelImpl _$$SearchHistoryModelImplFromJson(
           : DateTime.parse(json['lastReviewedAt'] as String),
     );
 
-Map<String, dynamic> _$$SearchHistoryModelImplToJson(
-        _$SearchHistoryModelImpl instance) =>
+Map<String, dynamic> _$SearchHistoryModelToJson(_SearchHistoryModel instance) =>
     <String, dynamic>{
       'searchHistoryId': instance.searchHistoryId,
       'userId': instance.userId,

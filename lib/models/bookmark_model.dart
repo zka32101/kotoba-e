@@ -4,7 +4,7 @@ part 'bookmark_model.freezed.dart';
 part 'bookmark_model.g.dart';
 
 @freezed
-class BookmarkModel with _$BookmarkModel {
+abstract class BookmarkModel with _$BookmarkModel {
   const factory BookmarkModel({
     required String bookmarkId,
     required String userId,

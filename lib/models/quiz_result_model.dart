@@ -4,7 +4,7 @@ part 'quiz_result_model.freezed.dart';
 part 'quiz_result_model.g.dart';
 
 @freezed
-class QuizResultModel with _$QuizResultModel {
+abstract class QuizResultModel with _$QuizResultModel {
   const factory QuizResultModel({
     required String resultId,
     required String userId,

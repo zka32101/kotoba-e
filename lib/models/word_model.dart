@@ -4,7 +4,7 @@ part 'word_model.freezed.dart';
 part 'word_model.g.dart';
 
 @freezed
-class WordModel with _$WordModel {
+abstract class WordModel with _$WordModel {
   const factory WordModel({
     required String wordId,
     required String wordName,
@@ -26,7 +26,7 @@ class WordModel with _$WordModel {
 }
 
 @freezed
-class NuanceExplanation with _$NuanceExplanation {
+abstract class NuanceExplanation with _$NuanceExplanation {
   const factory NuanceExplanation({
     required String background,
     required String usage,

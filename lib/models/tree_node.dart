@@ -4,7 +4,7 @@ part 'tree_node.freezed.dart';
 part 'tree_node.g.dart';
 
 @freezed
-class TreeNode with _$TreeNode {
+abstract class TreeNode with _$TreeNode {
   const factory TreeNode({
     required String wordId,
     required String wordName,
@@ -19,7 +19,7 @@ class TreeNode with _$TreeNode {
 }
 
 @freezed
-class WordTree with _$WordTree {
+abstract class WordTree with _$WordTree {
   const factory WordTree({
     required String userId,
     required int totalWords,

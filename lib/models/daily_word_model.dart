@@ -4,7 +4,7 @@ part 'daily_word_model.freezed.dart';
 part 'daily_word_model.g.dart';
 
 @freezed
-class DailyWord with _$DailyWord {
+abstract class DailyWord with _$DailyWord {
   const factory DailyWord({
     required int day,
     required String date,
@@ -24,7 +24,7 @@ class DailyWord with _$DailyWord {
 }
 
 @freezed
-class DailyWordNotification with _$DailyWordNotification {
+abstract class DailyWordNotification with _$DailyWordNotification {
   const factory DailyWordNotification({
     required String notificationId,
     required String userId,
