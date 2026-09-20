@@ -6,8 +6,8 @@ part of 'quiz_queue_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$QuizQueueModelImpl _$$QuizQueueModelImplFromJson(Map<String, dynamic> json) =>
-    _$QuizQueueModelImpl(
+_QuizQueueModel _$QuizQueueModelFromJson(Map<String, dynamic> json) =>
+    _QuizQueueModel(
       queueId: json['queueId'] as String,
       date: json['date'] as String,
       userId: json['userId'] as String,
@@ -17,8 +17,7 @@ _$QuizQueueModelImpl _$$QuizQueueModelImplFromJson(Map<String, dynamic> json) =>
       createdAt: DateTime.parse(json['createdAt'] as String),
     );
 
-Map<String, dynamic> _$$QuizQueueModelImplToJson(
-        _$QuizQueueModelImpl instance) =>
+Map<String, dynamic> _$QuizQueueModelToJson(_QuizQueueModel instance) =>
     <String, dynamic>{
       'queueId': instance.queueId,
       'date': instance.date,
@@ -29,19 +28,20 @@ Map<String, dynamic> _$$QuizQueueModelImplToJson(
       'createdAt': instance.createdAt.toIso8601String(),
     };
 
-_$QuizQuestionImpl _$$QuizQuestionImplFromJson(Map<String, dynamic> json) =>
-    _$QuizQuestionImpl(
+_QuizQuestion _$QuizQuestionFromJson(Map<String, dynamic> json) =>
+    _QuizQuestion(
       wordId: json['wordId'] as String,
       wordName: json['wordName'] as String,
       question: json['question'] as String,
-      options:
-          (json['options'] as List<dynamic>).map((e) => e as String).toList(),
+      options: (json['options'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
       correctIndex: (json['correctIndex'] as num).toInt(),
       questionNumber: (json['questionNumber'] as num).toInt(),
       totalQuestions: (json['totalQuestions'] as num).toInt(),
     );
 
-Map<String, dynamic> _$$QuizQuestionImplToJson(_$QuizQuestionImpl instance) =>
+Map<String, dynamic> _$QuizQuestionToJson(_QuizQuestion instance) =>
     <String, dynamic>{
       'wordId': instance.wordId,
       'wordName': instance.wordName,
@@ -52,16 +52,15 @@ Map<String, dynamic> _$$QuizQuestionImplToJson(_$QuizQuestionImpl instance) =>
       'totalQuestions': instance.totalQuestions,
     };
 
-_$QuizAnswerImpl _$$QuizAnswerImplFromJson(Map<String, dynamic> json) =>
-    _$QuizAnswerImpl(
-      wordId: json['wordId'] as String,
-      isCorrect: json['isCorrect'] as bool,
-      explanation: json['explanation'] as String,
-      nextReviewDate: DateTime.parse(json['nextReviewDate'] as String),
-      newDifficulty: json['newDifficulty'] as String,
-    );
+_QuizAnswer _$QuizAnswerFromJson(Map<String, dynamic> json) => _QuizAnswer(
+  wordId: json['wordId'] as String,
+  isCorrect: json['isCorrect'] as bool,
+  explanation: json['explanation'] as String,
+  nextReviewDate: DateTime.parse(json['nextReviewDate'] as String),
+  newDifficulty: json['newDifficulty'] as String,
+);
 
-Map<String, dynamic> _$$QuizAnswerImplToJson(_$QuizAnswerImpl instance) =>
+Map<String, dynamic> _$QuizAnswerToJson(_QuizAnswer instance) =>
     <String, dynamic>{
       'wordId': instance.wordId,
       'isCorrect': instance.isCorrect,

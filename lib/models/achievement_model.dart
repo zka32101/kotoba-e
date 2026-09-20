@@ -4,7 +4,7 @@ part 'achievement_model.freezed.dart';
 part 'achievement_model.g.dart';
 
 @freezed
-class AchievementModel with _$AchievementModel {
+abstract class AchievementModel with _$AchievementModel {
   const factory AchievementModel({
     required String achievementId,
     @Default('streak_7days') String achievementType,
@@ -17,7 +17,7 @@ class AchievementModel with _$AchievementModel {
 }
 
 @freezed
-class UserAchievementModel with _$UserAchievementModel {
+abstract class UserAchievementModel with _$UserAchievementModel {
   const factory UserAchievementModel({
     required String userAchievementId,
     required String userId,

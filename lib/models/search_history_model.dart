@@ -4,7 +4,7 @@ part 'search_history_model.freezed.dart';
 part 'search_history_model.g.dart';
 
 @freezed
-class SearchHistoryModel with _$SearchHistoryModel {
+abstract class SearchHistoryModel with _$SearchHistoryModel {
   const factory SearchHistoryModel({
     required String searchHistoryId,
     required String userId,

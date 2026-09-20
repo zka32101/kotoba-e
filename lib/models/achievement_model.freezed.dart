@@ -1,6 +1,6 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint
+// coverage:ignore-file
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'achievement_model.dart';
@@ -9,468 +9,568 @@ part of 'achievement_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-AchievementModel _$AchievementModelFromJson(Map<String, dynamic> json) {
-  return _AchievementModel.fromJson(json);
-}
 
 /// @nodoc
 mixin _$AchievementModel {
-  String get achievementId => throw _privateConstructorUsedError;
-  String get achievementType => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  String? get iconUrl => throw _privateConstructorUsedError;
+
+ String get achievementId; String get achievementType; String get description; String? get iconUrl;
+/// Create a copy of AchievementModel
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$AchievementModelCopyWith<AchievementModel> get copyWith => _$AchievementModelCopyWithImpl<AchievementModel>(this as AchievementModel, _$identity);
 
   /// Serializes this AchievementModel to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of AchievementModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $AchievementModelCopyWith<AchievementModel> get copyWith =>
-      throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  final _this = this as AchievementModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AchievementModel&&(identical(other.achievementId, _this.achievementId) || other.achievementId == _this.achievementId)&&(identical(other.achievementType, _this.achievementType) || other.achievementType == _this.achievementType)&&(identical(other.description, _this.description) || other.description == _this.description)&&(identical(other.iconUrl, _this.iconUrl) || other.iconUrl == _this.iconUrl));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+  final _this = this as AchievementModel;
+  return Object.hash(runtimeType,_this.achievementId,_this.achievementType,_this.description,_this.iconUrl);
+}
+
+@override
+String toString() {
+  final _this = this as AchievementModel;
+  return 'AchievementModel(achievementId: ${_this.achievementId}, achievementType: ${_this.achievementType}, description: ${_this.description}, iconUrl: ${_this.iconUrl})';
+}
+
+
 }
 
 /// @nodoc
-abstract class $AchievementModelCopyWith<$Res> {
-  factory $AchievementModelCopyWith(
-          AchievementModel value, $Res Function(AchievementModel) then) =
-      _$AchievementModelCopyWithImpl<$Res, AchievementModel>;
-  @useResult
-  $Res call(
-      {String achievementId,
-      String achievementType,
-      String description,
-      String? iconUrl});
-}
+abstract mixin class $AchievementModelCopyWith<$Res>  {
+  factory $AchievementModelCopyWith(AchievementModel value, $Res Function(AchievementModel) _then) = _$AchievementModelCopyWithImpl;
+@useResult
+$Res call({
+ String achievementId, String achievementType, String description, String? iconUrl
+});
 
+
+
+
+}
 /// @nodoc
-class _$AchievementModelCopyWithImpl<$Res, $Val extends AchievementModel>
+class _$AchievementModelCopyWithImpl<$Res>
     implements $AchievementModelCopyWith<$Res> {
-  _$AchievementModelCopyWithImpl(this._value, this._then);
+  _$AchievementModelCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final AchievementModel _self;
+  final $Res Function(AchievementModel) _then;
 
-  /// Create a copy of AchievementModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? achievementId = null,
-    Object? achievementType = null,
-    Object? description = null,
-    Object? iconUrl = freezed,
-  }) {
-    return _then(_value.copyWith(
-      achievementId: null == achievementId
-          ? _value.achievementId
-          : achievementId // ignore: cast_nullable_to_non_nullable
-              as String,
-      achievementType: null == achievementType
-          ? _value.achievementType
-          : achievementType // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      iconUrl: freezed == iconUrl
-          ? _value.iconUrl
-          : iconUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
+/// Create a copy of AchievementModel
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? achievementId = null,Object? achievementType = null,Object? description = null,Object? iconUrl = freezed,}) {
+  return _then(AchievementModel(
+achievementId: null == achievementId ? _self.achievementId : achievementId // ignore: cast_nullable_to_non_nullable
+as String,achievementType: null == achievementType ? _self.achievementType : achievementType // ignore: cast_nullable_to_non_nullable
+as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String,iconUrl: freezed == iconUrl ? _self.iconUrl : iconUrl // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
 }
 
-/// @nodoc
-abstract class _$$AchievementModelImplCopyWith<$Res>
-    implements $AchievementModelCopyWith<$Res> {
-  factory _$$AchievementModelImplCopyWith(_$AchievementModelImpl value,
-          $Res Function(_$AchievementModelImpl) then) =
-      __$$AchievementModelImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String achievementId,
-      String achievementType,
-      String description,
-      String? iconUrl});
 }
 
-/// @nodoc
-class __$$AchievementModelImplCopyWithImpl<$Res>
-    extends _$AchievementModelCopyWithImpl<$Res, _$AchievementModelImpl>
-    implements _$$AchievementModelImplCopyWith<$Res> {
-  __$$AchievementModelImplCopyWithImpl(_$AchievementModelImpl _value,
-      $Res Function(_$AchievementModelImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of AchievementModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? achievementId = null,
-    Object? achievementType = null,
-    Object? description = null,
-    Object? iconUrl = freezed,
-  }) {
-    return _then(_$AchievementModelImpl(
-      achievementId: null == achievementId
-          ? _value.achievementId
-          : achievementId // ignore: cast_nullable_to_non_nullable
-              as String,
-      achievementType: null == achievementType
-          ? _value.achievementType
-          : achievementType // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      iconUrl: freezed == iconUrl
-          ? _value.iconUrl
-          : iconUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
+/// Adds pattern-matching-related methods to [AchievementModel].
+extension AchievementModelPatterns on AchievementModel {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _AchievementModel value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _AchievementModel() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _AchievementModel value)  $default,){
+final _that = this;
+switch (_that) {
+case _AchievementModel():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _AchievementModel value)?  $default,){
+final _that = this;
+switch (_that) {
+case _AchievementModel() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String achievementId,  String achievementType,  String description,  String? iconUrl)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _AchievementModel() when $default != null:
+return $default(_that.achievementId,_that.achievementType,_that.description,_that.iconUrl);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String achievementId,  String achievementType,  String description,  String? iconUrl)  $default,) {final _that = this;
+switch (_that) {
+case _AchievementModel():
+return $default(_that.achievementId,_that.achievementType,_that.description,_that.iconUrl);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String achievementId,  String achievementType,  String description,  String? iconUrl)?  $default,) {final _that = this;
+switch (_that) {
+case _AchievementModel() when $default != null:
+return $default(_that.achievementId,_that.achievementType,_that.description,_that.iconUrl);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$AchievementModelImpl implements _AchievementModel {
-  const _$AchievementModelImpl(
-      {required this.achievementId,
-      this.achievementType = 'streak_7days',
-      required this.description,
-      this.iconUrl});
 
-  factory _$AchievementModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AchievementModelImplFromJson(json);
+class _AchievementModel implements AchievementModel {
+  const _AchievementModel({required this.achievementId, this.achievementType = 'streak_7days', required this.description, this.iconUrl});
+  factory _AchievementModel.fromJson(Map<String, dynamic> json) => _$AchievementModelFromJson(json);
 
-  @override
-  final String achievementId;
-  @override
-  @JsonKey()
-  final String achievementType;
-  @override
-  final String description;
-  @override
-  final String? iconUrl;
+@override final  String achievementId;
+@override@JsonKey() final  String achievementType;
+@override final  String description;
+@override final  String? iconUrl;
 
-  @override
-  String toString() {
+/// Create a copy of AchievementModel
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$AchievementModelCopyWith<_AchievementModel> get copyWith => __$AchievementModelCopyWithImpl<_AchievementModel>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$AchievementModelToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AchievementModel&&(identical(other.achievementId, achievementId) || other.achievementId == achievementId)&&(identical(other.achievementType, achievementType) || other.achievementType == achievementType)&&(identical(other.description, description) || other.description == description)&&(identical(other.iconUrl, iconUrl) || other.iconUrl == iconUrl));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+    return Object.hash(runtimeType,achievementId,achievementType,description,iconUrl);
+}
+
+@override
+String toString() {
     return 'AchievementModel(achievementId: $achievementId, achievementType: $achievementType, description: $description, iconUrl: $iconUrl)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AchievementModelImpl &&
-            (identical(other.achievementId, achievementId) ||
-                other.achievementId == achievementId) &&
-            (identical(other.achievementType, achievementType) ||
-                other.achievementType == achievementType) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.iconUrl, iconUrl) || other.iconUrl == iconUrl));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, achievementId, achievementType, description, iconUrl);
-
-  /// Create a copy of AchievementModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AchievementModelImplCopyWith<_$AchievementModelImpl> get copyWith =>
-      __$$AchievementModelImplCopyWithImpl<_$AchievementModelImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$AchievementModelImplToJson(
-      this,
-    );
-  }
 }
 
-abstract class _AchievementModel implements AchievementModel {
-  const factory _AchievementModel(
-      {required final String achievementId,
-      final String achievementType,
-      required final String description,
-      final String? iconUrl}) = _$AchievementModelImpl;
 
-  factory _AchievementModel.fromJson(Map<String, dynamic> json) =
-      _$AchievementModelImpl.fromJson;
-
-  @override
-  String get achievementId;
-  @override
-  String get achievementType;
-  @override
-  String get description;
-  @override
-  String? get iconUrl;
-
-  /// Create a copy of AchievementModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AchievementModelImplCopyWith<_$AchievementModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
-UserAchievementModel _$UserAchievementModelFromJson(Map<String, dynamic> json) {
-  return _UserAchievementModel.fromJson(json);
+/// @nodoc
+abstract mixin class _$AchievementModelCopyWith<$Res> implements $AchievementModelCopyWith<$Res> {
+  factory _$AchievementModelCopyWith(_AchievementModel value, $Res Function(_AchievementModel) _then) = __$AchievementModelCopyWithImpl;
+@override @useResult
+$Res call({
+ String achievementId, String achievementType, String description, String? iconUrl
+});
+
+
+
+
 }
+/// @nodoc
+class __$AchievementModelCopyWithImpl<$Res>
+    implements _$AchievementModelCopyWith<$Res> {
+  __$AchievementModelCopyWithImpl(this._self, this._then);
+
+  final _AchievementModel _self;
+  final $Res Function(_AchievementModel) _then;
+
+/// Create a copy of AchievementModel
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? achievementId = null,Object? achievementType = null,Object? description = null,Object? iconUrl = freezed,}) {
+  return _then(_AchievementModel(
+achievementId: null == achievementId ? _self.achievementId : achievementId // ignore: cast_nullable_to_non_nullable
+as String,achievementType: null == achievementType ? _self.achievementType : achievementType // ignore: cast_nullable_to_non_nullable
+as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String,iconUrl: freezed == iconUrl ? _self.iconUrl : iconUrl // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$UserAchievementModel {
-  String get userAchievementId => throw _privateConstructorUsedError;
-  String get userId => throw _privateConstructorUsedError;
-  String get achievementId => throw _privateConstructorUsedError;
-  DateTime get unlockedAt => throw _privateConstructorUsedError;
-  bool get notified => throw _privateConstructorUsedError;
+
+ String get userAchievementId; String get userId; String get achievementId; DateTime get unlockedAt; bool get notified;
+/// Create a copy of UserAchievementModel
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UserAchievementModelCopyWith<UserAchievementModel> get copyWith => _$UserAchievementModelCopyWithImpl<UserAchievementModel>(this as UserAchievementModel, _$identity);
 
   /// Serializes this UserAchievementModel to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of UserAchievementModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $UserAchievementModelCopyWith<UserAchievementModel> get copyWith =>
-      throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  final _this = this as UserAchievementModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserAchievementModel&&(identical(other.userAchievementId, _this.userAchievementId) || other.userAchievementId == _this.userAchievementId)&&(identical(other.userId, _this.userId) || other.userId == _this.userId)&&(identical(other.achievementId, _this.achievementId) || other.achievementId == _this.achievementId)&&(identical(other.unlockedAt, _this.unlockedAt) || other.unlockedAt == _this.unlockedAt)&&(identical(other.notified, _this.notified) || other.notified == _this.notified));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+  final _this = this as UserAchievementModel;
+  return Object.hash(runtimeType,_this.userAchievementId,_this.userId,_this.achievementId,_this.unlockedAt,_this.notified);
+}
+
+@override
+String toString() {
+  final _this = this as UserAchievementModel;
+  return 'UserAchievementModel(userAchievementId: ${_this.userAchievementId}, userId: ${_this.userId}, achievementId: ${_this.achievementId}, unlockedAt: ${_this.unlockedAt}, notified: ${_this.notified})';
+}
+
+
 }
 
 /// @nodoc
-abstract class $UserAchievementModelCopyWith<$Res> {
-  factory $UserAchievementModelCopyWith(UserAchievementModel value,
-          $Res Function(UserAchievementModel) then) =
-      _$UserAchievementModelCopyWithImpl<$Res, UserAchievementModel>;
-  @useResult
-  $Res call(
-      {String userAchievementId,
-      String userId,
-      String achievementId,
-      DateTime unlockedAt,
-      bool notified});
-}
+abstract mixin class $UserAchievementModelCopyWith<$Res>  {
+  factory $UserAchievementModelCopyWith(UserAchievementModel value, $Res Function(UserAchievementModel) _then) = _$UserAchievementModelCopyWithImpl;
+@useResult
+$Res call({
+ String userAchievementId, String userId, String achievementId, DateTime unlockedAt, bool notified
+});
 
+
+
+
+}
 /// @nodoc
-class _$UserAchievementModelCopyWithImpl<$Res,
-        $Val extends UserAchievementModel>
+class _$UserAchievementModelCopyWithImpl<$Res>
     implements $UserAchievementModelCopyWith<$Res> {
-  _$UserAchievementModelCopyWithImpl(this._value, this._then);
+  _$UserAchievementModelCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final UserAchievementModel _self;
+  final $Res Function(UserAchievementModel) _then;
 
-  /// Create a copy of UserAchievementModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? userAchievementId = null,
-    Object? userId = null,
-    Object? achievementId = null,
-    Object? unlockedAt = null,
-    Object? notified = null,
-  }) {
-    return _then(_value.copyWith(
-      userAchievementId: null == userAchievementId
-          ? _value.userAchievementId
-          : userAchievementId // ignore: cast_nullable_to_non_nullable
-              as String,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      achievementId: null == achievementId
-          ? _value.achievementId
-          : achievementId // ignore: cast_nullable_to_non_nullable
-              as String,
-      unlockedAt: null == unlockedAt
-          ? _value.unlockedAt
-          : unlockedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      notified: null == notified
-          ? _value.notified
-          : notified // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
+/// Create a copy of UserAchievementModel
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? userAchievementId = null,Object? userId = null,Object? achievementId = null,Object? unlockedAt = null,Object? notified = null,}) {
+  return _then(UserAchievementModel(
+userAchievementId: null == userAchievementId ? _self.userAchievementId : userAchievementId // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,achievementId: null == achievementId ? _self.achievementId : achievementId // ignore: cast_nullable_to_non_nullable
+as String,unlockedAt: null == unlockedAt ? _self.unlockedAt : unlockedAt // ignore: cast_nullable_to_non_nullable
+as DateTime,notified: null == notified ? _self.notified : notified // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-/// @nodoc
-abstract class _$$UserAchievementModelImplCopyWith<$Res>
-    implements $UserAchievementModelCopyWith<$Res> {
-  factory _$$UserAchievementModelImplCopyWith(_$UserAchievementModelImpl value,
-          $Res Function(_$UserAchievementModelImpl) then) =
-      __$$UserAchievementModelImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String userAchievementId,
-      String userId,
-      String achievementId,
-      DateTime unlockedAt,
-      bool notified});
 }
 
-/// @nodoc
-class __$$UserAchievementModelImplCopyWithImpl<$Res>
-    extends _$UserAchievementModelCopyWithImpl<$Res, _$UserAchievementModelImpl>
-    implements _$$UserAchievementModelImplCopyWith<$Res> {
-  __$$UserAchievementModelImplCopyWithImpl(_$UserAchievementModelImpl _value,
-      $Res Function(_$UserAchievementModelImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of UserAchievementModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? userAchievementId = null,
-    Object? userId = null,
-    Object? achievementId = null,
-    Object? unlockedAt = null,
-    Object? notified = null,
-  }) {
-    return _then(_$UserAchievementModelImpl(
-      userAchievementId: null == userAchievementId
-          ? _value.userAchievementId
-          : userAchievementId // ignore: cast_nullable_to_non_nullable
-              as String,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      achievementId: null == achievementId
-          ? _value.achievementId
-          : achievementId // ignore: cast_nullable_to_non_nullable
-              as String,
-      unlockedAt: null == unlockedAt
-          ? _value.unlockedAt
-          : unlockedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      notified: null == notified
-          ? _value.notified
-          : notified // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+/// Adds pattern-matching-related methods to [UserAchievementModel].
+extension UserAchievementModelPatterns on UserAchievementModel {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _UserAchievementModel value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _UserAchievementModel() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _UserAchievementModel value)  $default,){
+final _that = this;
+switch (_that) {
+case _UserAchievementModel():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _UserAchievementModel value)?  $default,){
+final _that = this;
+switch (_that) {
+case _UserAchievementModel() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userAchievementId,  String userId,  String achievementId,  DateTime unlockedAt,  bool notified)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _UserAchievementModel() when $default != null:
+return $default(_that.userAchievementId,_that.userId,_that.achievementId,_that.unlockedAt,_that.notified);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userAchievementId,  String userId,  String achievementId,  DateTime unlockedAt,  bool notified)  $default,) {final _that = this;
+switch (_that) {
+case _UserAchievementModel():
+return $default(_that.userAchievementId,_that.userId,_that.achievementId,_that.unlockedAt,_that.notified);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userAchievementId,  String userId,  String achievementId,  DateTime unlockedAt,  bool notified)?  $default,) {final _that = this;
+switch (_that) {
+case _UserAchievementModel() when $default != null:
+return $default(_that.userAchievementId,_that.userId,_that.achievementId,_that.unlockedAt,_that.notified);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$UserAchievementModelImpl implements _UserAchievementModel {
-  const _$UserAchievementModelImpl(
-      {required this.userAchievementId,
-      required this.userId,
-      required this.achievementId,
-      required this.unlockedAt,
-      this.notified = false});
 
-  factory _$UserAchievementModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserAchievementModelImplFromJson(json);
+class _UserAchievementModel implements UserAchievementModel {
+  const _UserAchievementModel({required this.userAchievementId, required this.userId, required this.achievementId, required this.unlockedAt, this.notified = false});
+  factory _UserAchievementModel.fromJson(Map<String, dynamic> json) => _$UserAchievementModelFromJson(json);
 
-  @override
-  final String userAchievementId;
-  @override
-  final String userId;
-  @override
-  final String achievementId;
-  @override
-  final DateTime unlockedAt;
-  @override
-  @JsonKey()
-  final bool notified;
+@override final  String userAchievementId;
+@override final  String userId;
+@override final  String achievementId;
+@override final  DateTime unlockedAt;
+@override@JsonKey() final  bool notified;
 
-  @override
-  String toString() {
+/// Create a copy of UserAchievementModel
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$UserAchievementModelCopyWith<_UserAchievementModel> get copyWith => __$UserAchievementModelCopyWithImpl<_UserAchievementModel>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$UserAchievementModelToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserAchievementModel&&(identical(other.userAchievementId, userAchievementId) || other.userAchievementId == userAchievementId)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.achievementId, achievementId) || other.achievementId == achievementId)&&(identical(other.unlockedAt, unlockedAt) || other.unlockedAt == unlockedAt)&&(identical(other.notified, notified) || other.notified == notified));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+    return Object.hash(runtimeType,userAchievementId,userId,achievementId,unlockedAt,notified);
+}
+
+@override
+String toString() {
     return 'UserAchievementModel(userAchievementId: $userAchievementId, userId: $userId, achievementId: $achievementId, unlockedAt: $unlockedAt, notified: $notified)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UserAchievementModelImpl &&
-            (identical(other.userAchievementId, userAchievementId) ||
-                other.userAchievementId == userAchievementId) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.achievementId, achievementId) ||
-                other.achievementId == achievementId) &&
-            (identical(other.unlockedAt, unlockedAt) ||
-                other.unlockedAt == unlockedAt) &&
-            (identical(other.notified, notified) ||
-                other.notified == notified));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, userAchievementId, userId,
-      achievementId, unlockedAt, notified);
-
-  /// Create a copy of UserAchievementModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UserAchievementModelImplCopyWith<_$UserAchievementModelImpl>
-      get copyWith =>
-          __$$UserAchievementModelImplCopyWithImpl<_$UserAchievementModelImpl>(
-              this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$UserAchievementModelImplToJson(
-      this,
-    );
-  }
 }
 
-abstract class _UserAchievementModel implements UserAchievementModel {
-  const factory _UserAchievementModel(
-      {required final String userAchievementId,
-      required final String userId,
-      required final String achievementId,
-      required final DateTime unlockedAt,
-      final bool notified}) = _$UserAchievementModelImpl;
 
-  factory _UserAchievementModel.fromJson(Map<String, dynamic> json) =
-      _$UserAchievementModelImpl.fromJson;
-
-  @override
-  String get userAchievementId;
-  @override
-  String get userId;
-  @override
-  String get achievementId;
-  @override
-  DateTime get unlockedAt;
-  @override
-  bool get notified;
-
-  /// Create a copy of UserAchievementModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UserAchievementModelImplCopyWith<_$UserAchievementModelImpl>
-      get copyWith => throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+abstract mixin class _$UserAchievementModelCopyWith<$Res> implements $UserAchievementModelCopyWith<$Res> {
+  factory _$UserAchievementModelCopyWith(_UserAchievementModel value, $Res Function(_UserAchievementModel) _then) = __$UserAchievementModelCopyWithImpl;
+@override @useResult
+$Res call({
+ String userAchievementId, String userId, String achievementId, DateTime unlockedAt, bool notified
+});
+
+
+
+
+}
+/// @nodoc
+class __$UserAchievementModelCopyWithImpl<$Res>
+    implements _$UserAchievementModelCopyWith<$Res> {
+  __$UserAchievementModelCopyWithImpl(this._self, this._then);
+
+  final _UserAchievementModel _self;
+  final $Res Function(_UserAchievementModel) _then;
+
+/// Create a copy of UserAchievementModel
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? userAchievementId = null,Object? userId = null,Object? achievementId = null,Object? unlockedAt = null,Object? notified = null,}) {
+  return _then(_UserAchievementModel(
+userAchievementId: null == userAchievementId ? _self.userAchievementId : userAchievementId // ignore: cast_nullable_to_non_nullable
+as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,achievementId: null == achievementId ? _self.achievementId : achievementId // ignore: cast_nullable_to_non_nullable
+as String,unlockedAt: null == unlockedAt ? _self.unlockedAt : unlockedAt // ignore: cast_nullable_to_non_nullable
+as DateTime,notified: null == notified ? _self.notified : notified // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
+// dart format on

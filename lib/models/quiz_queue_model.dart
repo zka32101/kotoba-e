@@ -5,7 +5,7 @@ part 'quiz_queue_model.g.dart';
 
 // 事前計算された今日のクイズキュー
 @freezed
-class QuizQueueModel with _$QuizQueueModel {
+abstract class QuizQueueModel with _$QuizQueueModel {
   const factory QuizQueueModel({
     required String queueId,
     required String date, // YYYY-MM-DD
@@ -22,7 +22,7 @@ class QuizQueueModel with _$QuizQueueModel {
 
 // クイズ問題（UI表示用）
 @freezed
-class QuizQuestion with _$QuizQuestion {
+abstract class QuizQuestion with _$QuizQuestion {
   const factory QuizQuestion({
     required String wordId,
     required String wordName,
@@ -39,7 +39,7 @@ class QuizQuestion with _$QuizQuestion {
 
 // クイズ回答結果
 @freezed
-class QuizAnswer with _$QuizAnswer {
+abstract class QuizAnswer with _$QuizAnswer {
   const factory QuizAnswer({
     required String wordId,
     required bool isCorrect,

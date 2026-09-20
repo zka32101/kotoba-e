@@ -1,6 +1,6 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint
+// coverage:ignore-file
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'tree_node.dart';
@@ -9,555 +9,595 @@ part of 'tree_node.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-TreeNode _$TreeNodeFromJson(Map<String, dynamic> json) {
-  return _TreeNode.fromJson(json);
-}
 
 /// @nodoc
 mixin _$TreeNode {
-  String get wordId => throw _privateConstructorUsedError;
-  String get wordName => throw _privateConstructorUsedError;
-  int get depth => throw _privateConstructorUsedError;
-  DateTime get addedAt => throw _privateConstructorUsedError;
-  List<String> get childWordIds => throw _privateConstructorUsedError;
-  List<String> get connectedKanji => throw _privateConstructorUsedError;
+
+ String get wordId; String get wordName; int get depth; DateTime get addedAt; List<String> get childWordIds; List<String> get connectedKanji;
+/// Create a copy of TreeNode
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$TreeNodeCopyWith<TreeNode> get copyWith => _$TreeNodeCopyWithImpl<TreeNode>(this as TreeNode, _$identity);
 
   /// Serializes this TreeNode to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of TreeNode
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $TreeNodeCopyWith<TreeNode> get copyWith =>
-      throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  final _this = this as TreeNode;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TreeNode&&(identical(other.wordId, _this.wordId) || other.wordId == _this.wordId)&&(identical(other.wordName, _this.wordName) || other.wordName == _this.wordName)&&(identical(other.depth, _this.depth) || other.depth == _this.depth)&&(identical(other.addedAt, _this.addedAt) || other.addedAt == _this.addedAt)&&const DeepCollectionEquality().equals(other.childWordIds, _this.childWordIds)&&const DeepCollectionEquality().equals(other.connectedKanji, _this.connectedKanji));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+  final _this = this as TreeNode;
+  return Object.hash(runtimeType,_this.wordId,_this.wordName,_this.depth,_this.addedAt,const DeepCollectionEquality().hash(_this.childWordIds),const DeepCollectionEquality().hash(_this.connectedKanji));
+}
+
+@override
+String toString() {
+  final _this = this as TreeNode;
+  return 'TreeNode(wordId: ${_this.wordId}, wordName: ${_this.wordName}, depth: ${_this.depth}, addedAt: ${_this.addedAt}, childWordIds: ${_this.childWordIds}, connectedKanji: ${_this.connectedKanji})';
+}
+
+
 }
 
 /// @nodoc
-abstract class $TreeNodeCopyWith<$Res> {
-  factory $TreeNodeCopyWith(TreeNode value, $Res Function(TreeNode) then) =
-      _$TreeNodeCopyWithImpl<$Res, TreeNode>;
-  @useResult
-  $Res call(
-      {String wordId,
-      String wordName,
-      int depth,
-      DateTime addedAt,
-      List<String> childWordIds,
-      List<String> connectedKanji});
-}
+abstract mixin class $TreeNodeCopyWith<$Res>  {
+  factory $TreeNodeCopyWith(TreeNode value, $Res Function(TreeNode) _then) = _$TreeNodeCopyWithImpl;
+@useResult
+$Res call({
+ String wordId, String wordName, int depth, DateTime addedAt, List<String> childWordIds, List<String> connectedKanji
+});
 
+
+
+
+}
 /// @nodoc
-class _$TreeNodeCopyWithImpl<$Res, $Val extends TreeNode>
+class _$TreeNodeCopyWithImpl<$Res>
     implements $TreeNodeCopyWith<$Res> {
-  _$TreeNodeCopyWithImpl(this._value, this._then);
+  _$TreeNodeCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final TreeNode _self;
+  final $Res Function(TreeNode) _then;
 
-  /// Create a copy of TreeNode
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? wordId = null,
-    Object? wordName = null,
-    Object? depth = null,
-    Object? addedAt = null,
-    Object? childWordIds = null,
-    Object? connectedKanji = null,
-  }) {
-    return _then(_value.copyWith(
-      wordId: null == wordId
-          ? _value.wordId
-          : wordId // ignore: cast_nullable_to_non_nullable
-              as String,
-      wordName: null == wordName
-          ? _value.wordName
-          : wordName // ignore: cast_nullable_to_non_nullable
-              as String,
-      depth: null == depth
-          ? _value.depth
-          : depth // ignore: cast_nullable_to_non_nullable
-              as int,
-      addedAt: null == addedAt
-          ? _value.addedAt
-          : addedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      childWordIds: null == childWordIds
-          ? _value.childWordIds
-          : childWordIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      connectedKanji: null == connectedKanji
-          ? _value.connectedKanji
-          : connectedKanji // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
-  }
+/// Create a copy of TreeNode
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? wordId = null,Object? wordName = null,Object? depth = null,Object? addedAt = null,Object? childWordIds = null,Object? connectedKanji = null,}) {
+  return _then(TreeNode(
+wordId: null == wordId ? _self.wordId : wordId // ignore: cast_nullable_to_non_nullable
+as String,wordName: null == wordName ? _self.wordName : wordName // ignore: cast_nullable_to_non_nullable
+as String,depth: null == depth ? _self.depth : depth // ignore: cast_nullable_to_non_nullable
+as int,addedAt: null == addedAt ? _self.addedAt : addedAt // ignore: cast_nullable_to_non_nullable
+as DateTime,childWordIds: null == childWordIds ? _self.childWordIds : childWordIds // ignore: cast_nullable_to_non_nullable
+as List<String>,connectedKanji: null == connectedKanji ? _self.connectedKanji : connectedKanji // ignore: cast_nullable_to_non_nullable
+as List<String>,
+  ));
 }
 
-/// @nodoc
-abstract class _$$TreeNodeImplCopyWith<$Res>
-    implements $TreeNodeCopyWith<$Res> {
-  factory _$$TreeNodeImplCopyWith(
-          _$TreeNodeImpl value, $Res Function(_$TreeNodeImpl) then) =
-      __$$TreeNodeImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String wordId,
-      String wordName,
-      int depth,
-      DateTime addedAt,
-      List<String> childWordIds,
-      List<String> connectedKanji});
 }
 
-/// @nodoc
-class __$$TreeNodeImplCopyWithImpl<$Res>
-    extends _$TreeNodeCopyWithImpl<$Res, _$TreeNodeImpl>
-    implements _$$TreeNodeImplCopyWith<$Res> {
-  __$$TreeNodeImplCopyWithImpl(
-      _$TreeNodeImpl _value, $Res Function(_$TreeNodeImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of TreeNode
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? wordId = null,
-    Object? wordName = null,
-    Object? depth = null,
-    Object? addedAt = null,
-    Object? childWordIds = null,
-    Object? connectedKanji = null,
-  }) {
-    return _then(_$TreeNodeImpl(
-      wordId: null == wordId
-          ? _value.wordId
-          : wordId // ignore: cast_nullable_to_non_nullable
-              as String,
-      wordName: null == wordName
-          ? _value.wordName
-          : wordName // ignore: cast_nullable_to_non_nullable
-              as String,
-      depth: null == depth
-          ? _value.depth
-          : depth // ignore: cast_nullable_to_non_nullable
-              as int,
-      addedAt: null == addedAt
-          ? _value.addedAt
-          : addedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      childWordIds: null == childWordIds
-          ? _value._childWordIds
-          : childWordIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      connectedKanji: null == connectedKanji
-          ? _value._connectedKanji
-          : connectedKanji // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ));
-  }
+/// Adds pattern-matching-related methods to [TreeNode].
+extension TreeNodePatterns on TreeNode {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _TreeNode value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _TreeNode() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _TreeNode value)  $default,){
+final _that = this;
+switch (_that) {
+case _TreeNode():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _TreeNode value)?  $default,){
+final _that = this;
+switch (_that) {
+case _TreeNode() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String wordId,  String wordName,  int depth,  DateTime addedAt,  List<String> childWordIds,  List<String> connectedKanji)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _TreeNode() when $default != null:
+return $default(_that.wordId,_that.wordName,_that.depth,_that.addedAt,_that.childWordIds,_that.connectedKanji);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String wordId,  String wordName,  int depth,  DateTime addedAt,  List<String> childWordIds,  List<String> connectedKanji)  $default,) {final _that = this;
+switch (_that) {
+case _TreeNode():
+return $default(_that.wordId,_that.wordName,_that.depth,_that.addedAt,_that.childWordIds,_that.connectedKanji);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String wordId,  String wordName,  int depth,  DateTime addedAt,  List<String> childWordIds,  List<String> connectedKanji)?  $default,) {final _that = this;
+switch (_that) {
+case _TreeNode() when $default != null:
+return $default(_that.wordId,_that.wordName,_that.depth,_that.addedAt,_that.childWordIds,_that.connectedKanji);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$TreeNodeImpl implements _TreeNode {
-  const _$TreeNodeImpl(
-      {required this.wordId,
-      required this.wordName,
-      required this.depth,
-      required this.addedAt,
-      final List<String> childWordIds = const [],
-      final List<String> connectedKanji = const []})
-      : _childWordIds = childWordIds,
-        _connectedKanji = connectedKanji;
 
-  factory _$TreeNodeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TreeNodeImplFromJson(json);
+class _TreeNode implements TreeNode {
+  const _TreeNode({required this.wordId, required this.wordName, required this.depth, required this.addedAt,  List<String> childWordIds = const [],  List<String> connectedKanji = const []}): _childWordIds = childWordIds,_connectedKanji = connectedKanji;
+  factory _TreeNode.fromJson(Map<String, dynamic> json) => _$TreeNodeFromJson(json);
 
-  @override
-  final String wordId;
-  @override
-  final String wordName;
-  @override
-  final int depth;
-  @override
-  final DateTime addedAt;
-  final List<String> _childWordIds;
-  @override
-  @JsonKey()
-  List<String> get childWordIds {
-    if (_childWordIds is EqualUnmodifiableListView) return _childWordIds;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_childWordIds);
-  }
+@override final  String wordId;
+@override final  String wordName;
+@override final  int depth;
+@override final  DateTime addedAt;
+ final  List<String> _childWordIds;
+@override@JsonKey() List<String> get childWordIds {
+  if (_childWordIds is EqualUnmodifiableListView) return _childWordIds;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_childWordIds);
+}
 
-  final List<String> _connectedKanji;
-  @override
-  @JsonKey()
-  List<String> get connectedKanji {
-    if (_connectedKanji is EqualUnmodifiableListView) return _connectedKanji;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_connectedKanji);
-  }
+ final  List<String> _connectedKanji;
+@override@JsonKey() List<String> get connectedKanji {
+  if (_connectedKanji is EqualUnmodifiableListView) return _connectedKanji;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_connectedKanji);
+}
 
-  @override
-  String toString() {
+
+/// Create a copy of TreeNode
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$TreeNodeCopyWith<_TreeNode> get copyWith => __$TreeNodeCopyWithImpl<_TreeNode>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$TreeNodeToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TreeNode&&(identical(other.wordId, wordId) || other.wordId == wordId)&&(identical(other.wordName, wordName) || other.wordName == wordName)&&(identical(other.depth, depth) || other.depth == depth)&&(identical(other.addedAt, addedAt) || other.addedAt == addedAt)&&const DeepCollectionEquality().equals(other.childWordIds, _childWordIds)&&const DeepCollectionEquality().equals(other.connectedKanji, _connectedKanji));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+    return Object.hash(runtimeType,wordId,wordName,depth,addedAt,const DeepCollectionEquality().hash(_childWordIds),const DeepCollectionEquality().hash(_connectedKanji));
+}
+
+@override
+String toString() {
     return 'TreeNode(wordId: $wordId, wordName: $wordName, depth: $depth, addedAt: $addedAt, childWordIds: $childWordIds, connectedKanji: $connectedKanji)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TreeNodeImpl &&
-            (identical(other.wordId, wordId) || other.wordId == wordId) &&
-            (identical(other.wordName, wordName) ||
-                other.wordName == wordName) &&
-            (identical(other.depth, depth) || other.depth == depth) &&
-            (identical(other.addedAt, addedAt) || other.addedAt == addedAt) &&
-            const DeepCollectionEquality()
-                .equals(other._childWordIds, _childWordIds) &&
-            const DeepCollectionEquality()
-                .equals(other._connectedKanji, _connectedKanji));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      wordId,
-      wordName,
-      depth,
-      addedAt,
-      const DeepCollectionEquality().hash(_childWordIds),
-      const DeepCollectionEquality().hash(_connectedKanji));
-
-  /// Create a copy of TreeNode
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TreeNodeImplCopyWith<_$TreeNodeImpl> get copyWith =>
-      __$$TreeNodeImplCopyWithImpl<_$TreeNodeImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TreeNodeImplToJson(
-      this,
-    );
-  }
 }
 
-abstract class _TreeNode implements TreeNode {
-  const factory _TreeNode(
-      {required final String wordId,
-      required final String wordName,
-      required final int depth,
-      required final DateTime addedAt,
-      final List<String> childWordIds,
-      final List<String> connectedKanji}) = _$TreeNodeImpl;
 
-  factory _TreeNode.fromJson(Map<String, dynamic> json) =
-      _$TreeNodeImpl.fromJson;
-
-  @override
-  String get wordId;
-  @override
-  String get wordName;
-  @override
-  int get depth;
-  @override
-  DateTime get addedAt;
-  @override
-  List<String> get childWordIds;
-  @override
-  List<String> get connectedKanji;
-
-  /// Create a copy of TreeNode
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TreeNodeImplCopyWith<_$TreeNodeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
-WordTree _$WordTreeFromJson(Map<String, dynamic> json) {
-  return _WordTree.fromJson(json);
+/// @nodoc
+abstract mixin class _$TreeNodeCopyWith<$Res> implements $TreeNodeCopyWith<$Res> {
+  factory _$TreeNodeCopyWith(_TreeNode value, $Res Function(_TreeNode) _then) = __$TreeNodeCopyWithImpl;
+@override @useResult
+$Res call({
+ String wordId, String wordName, int depth, DateTime addedAt, List<String> childWordIds, List<String> connectedKanji
+});
+
+
+
+
 }
+/// @nodoc
+class __$TreeNodeCopyWithImpl<$Res>
+    implements _$TreeNodeCopyWith<$Res> {
+  __$TreeNodeCopyWithImpl(this._self, this._then);
+
+  final _TreeNode _self;
+  final $Res Function(_TreeNode) _then;
+
+/// Create a copy of TreeNode
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? wordId = null,Object? wordName = null,Object? depth = null,Object? addedAt = null,Object? childWordIds = null,Object? connectedKanji = null,}) {
+  return _then(_TreeNode(
+wordId: null == wordId ? _self.wordId : wordId // ignore: cast_nullable_to_non_nullable
+as String,wordName: null == wordName ? _self.wordName : wordName // ignore: cast_nullable_to_non_nullable
+as String,depth: null == depth ? _self.depth : depth // ignore: cast_nullable_to_non_nullable
+as int,addedAt: null == addedAt ? _self.addedAt : addedAt // ignore: cast_nullable_to_non_nullable
+as DateTime,childWordIds: null == childWordIds ? _self._childWordIds : childWordIds // ignore: cast_nullable_to_non_nullable
+as List<String>,connectedKanji: null == connectedKanji ? _self._connectedKanji : connectedKanji // ignore: cast_nullable_to_non_nullable
+as List<String>,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$WordTree {
-  String get userId => throw _privateConstructorUsedError;
-  int get totalWords => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  List<TreeNode> get nodes => throw _privateConstructorUsedError;
-  int get treeLevelUnlocked => throw _privateConstructorUsedError;
-  DateTime? get lastUpdated => throw _privateConstructorUsedError;
+
+ String get userId; int get totalWords; DateTime get createdAt; List<TreeNode> get nodes; int get treeLevelUnlocked; DateTime? get lastUpdated;
+/// Create a copy of WordTree
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$WordTreeCopyWith<WordTree> get copyWith => _$WordTreeCopyWithImpl<WordTree>(this as WordTree, _$identity);
 
   /// Serializes this WordTree to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of WordTree
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $WordTreeCopyWith<WordTree> get copyWith =>
-      throw _privateConstructorUsedError;
+
+@override
+bool operator ==(Object other) {
+  final _this = this as WordTree;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WordTree&&(identical(other.userId, _this.userId) || other.userId == _this.userId)&&(identical(other.totalWords, _this.totalWords) || other.totalWords == _this.totalWords)&&(identical(other.createdAt, _this.createdAt) || other.createdAt == _this.createdAt)&&const DeepCollectionEquality().equals(other.nodes, _this.nodes)&&(identical(other.treeLevelUnlocked, _this.treeLevelUnlocked) || other.treeLevelUnlocked == _this.treeLevelUnlocked)&&(identical(other.lastUpdated, _this.lastUpdated) || other.lastUpdated == _this.lastUpdated));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+  final _this = this as WordTree;
+  return Object.hash(runtimeType,_this.userId,_this.totalWords,_this.createdAt,const DeepCollectionEquality().hash(_this.nodes),_this.treeLevelUnlocked,_this.lastUpdated);
+}
+
+@override
+String toString() {
+  final _this = this as WordTree;
+  return 'WordTree(userId: ${_this.userId}, totalWords: ${_this.totalWords}, createdAt: ${_this.createdAt}, nodes: ${_this.nodes}, treeLevelUnlocked: ${_this.treeLevelUnlocked}, lastUpdated: ${_this.lastUpdated})';
+}
+
+
 }
 
 /// @nodoc
-abstract class $WordTreeCopyWith<$Res> {
-  factory $WordTreeCopyWith(WordTree value, $Res Function(WordTree) then) =
-      _$WordTreeCopyWithImpl<$Res, WordTree>;
-  @useResult
-  $Res call(
-      {String userId,
-      int totalWords,
-      DateTime createdAt,
-      List<TreeNode> nodes,
-      int treeLevelUnlocked,
-      DateTime? lastUpdated});
-}
+abstract mixin class $WordTreeCopyWith<$Res>  {
+  factory $WordTreeCopyWith(WordTree value, $Res Function(WordTree) _then) = _$WordTreeCopyWithImpl;
+@useResult
+$Res call({
+ String userId, int totalWords, DateTime createdAt, List<TreeNode> nodes, int treeLevelUnlocked, DateTime? lastUpdated
+});
 
+
+
+
+}
 /// @nodoc
-class _$WordTreeCopyWithImpl<$Res, $Val extends WordTree>
+class _$WordTreeCopyWithImpl<$Res>
     implements $WordTreeCopyWith<$Res> {
-  _$WordTreeCopyWithImpl(this._value, this._then);
+  _$WordTreeCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final WordTree _self;
+  final $Res Function(WordTree) _then;
 
-  /// Create a copy of WordTree
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? userId = null,
-    Object? totalWords = null,
-    Object? createdAt = null,
-    Object? nodes = null,
-    Object? treeLevelUnlocked = null,
-    Object? lastUpdated = freezed,
-  }) {
-    return _then(_value.copyWith(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      totalWords: null == totalWords
-          ? _value.totalWords
-          : totalWords // ignore: cast_nullable_to_non_nullable
-              as int,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      nodes: null == nodes
-          ? _value.nodes
-          : nodes // ignore: cast_nullable_to_non_nullable
-              as List<TreeNode>,
-      treeLevelUnlocked: null == treeLevelUnlocked
-          ? _value.treeLevelUnlocked
-          : treeLevelUnlocked // ignore: cast_nullable_to_non_nullable
-              as int,
-      lastUpdated: freezed == lastUpdated
-          ? _value.lastUpdated
-          : lastUpdated // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ) as $Val);
-  }
+/// Create a copy of WordTree
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? totalWords = null,Object? createdAt = null,Object? nodes = null,Object? treeLevelUnlocked = null,Object? lastUpdated = freezed,}) {
+  return _then(WordTree(
+userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,totalWords: null == totalWords ? _self.totalWords : totalWords // ignore: cast_nullable_to_non_nullable
+as int,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,nodes: null == nodes ? _self.nodes : nodes // ignore: cast_nullable_to_non_nullable
+as List<TreeNode>,treeLevelUnlocked: null == treeLevelUnlocked ? _self.treeLevelUnlocked : treeLevelUnlocked // ignore: cast_nullable_to_non_nullable
+as int,lastUpdated: freezed == lastUpdated ? _self.lastUpdated : lastUpdated // ignore: cast_nullable_to_non_nullable
+as DateTime?,
+  ));
 }
 
-/// @nodoc
-abstract class _$$WordTreeImplCopyWith<$Res>
-    implements $WordTreeCopyWith<$Res> {
-  factory _$$WordTreeImplCopyWith(
-          _$WordTreeImpl value, $Res Function(_$WordTreeImpl) then) =
-      __$$WordTreeImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String userId,
-      int totalWords,
-      DateTime createdAt,
-      List<TreeNode> nodes,
-      int treeLevelUnlocked,
-      DateTime? lastUpdated});
 }
 
-/// @nodoc
-class __$$WordTreeImplCopyWithImpl<$Res>
-    extends _$WordTreeCopyWithImpl<$Res, _$WordTreeImpl>
-    implements _$$WordTreeImplCopyWith<$Res> {
-  __$$WordTreeImplCopyWithImpl(
-      _$WordTreeImpl _value, $Res Function(_$WordTreeImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of WordTree
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? userId = null,
-    Object? totalWords = null,
-    Object? createdAt = null,
-    Object? nodes = null,
-    Object? treeLevelUnlocked = null,
-    Object? lastUpdated = freezed,
-  }) {
-    return _then(_$WordTreeImpl(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      totalWords: null == totalWords
-          ? _value.totalWords
-          : totalWords // ignore: cast_nullable_to_non_nullable
-              as int,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      nodes: null == nodes
-          ? _value._nodes
-          : nodes // ignore: cast_nullable_to_non_nullable
-              as List<TreeNode>,
-      treeLevelUnlocked: null == treeLevelUnlocked
-          ? _value.treeLevelUnlocked
-          : treeLevelUnlocked // ignore: cast_nullable_to_non_nullable
-              as int,
-      lastUpdated: freezed == lastUpdated
-          ? _value.lastUpdated
-          : lastUpdated // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ));
-  }
+/// Adds pattern-matching-related methods to [WordTree].
+extension WordTreePatterns on WordTree {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _WordTree value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _WordTree() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _WordTree value)  $default,){
+final _that = this;
+switch (_that) {
+case _WordTree():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _WordTree value)?  $default,){
+final _that = this;
+switch (_that) {
+case _WordTree() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userId,  int totalWords,  DateTime createdAt,  List<TreeNode> nodes,  int treeLevelUnlocked,  DateTime? lastUpdated)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _WordTree() when $default != null:
+return $default(_that.userId,_that.totalWords,_that.createdAt,_that.nodes,_that.treeLevelUnlocked,_that.lastUpdated);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userId,  int totalWords,  DateTime createdAt,  List<TreeNode> nodes,  int treeLevelUnlocked,  DateTime? lastUpdated)  $default,) {final _that = this;
+switch (_that) {
+case _WordTree():
+return $default(_that.userId,_that.totalWords,_that.createdAt,_that.nodes,_that.treeLevelUnlocked,_that.lastUpdated);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userId,  int totalWords,  DateTime createdAt,  List<TreeNode> nodes,  int treeLevelUnlocked,  DateTime? lastUpdated)?  $default,) {final _that = this;
+switch (_that) {
+case _WordTree() when $default != null:
+return $default(_that.userId,_that.totalWords,_that.createdAt,_that.nodes,_that.treeLevelUnlocked,_that.lastUpdated);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$WordTreeImpl implements _WordTree {
-  const _$WordTreeImpl(
-      {required this.userId,
-      required this.totalWords,
-      required this.createdAt,
-      final List<TreeNode> nodes = const [],
-      required this.treeLevelUnlocked,
-      this.lastUpdated})
-      : _nodes = nodes;
 
-  factory _$WordTreeImpl.fromJson(Map<String, dynamic> json) =>
-      _$$WordTreeImplFromJson(json);
+class _WordTree implements WordTree {
+  const _WordTree({required this.userId, required this.totalWords, required this.createdAt,  List<TreeNode> nodes = const [], required this.treeLevelUnlocked, this.lastUpdated}): _nodes = nodes;
+  factory _WordTree.fromJson(Map<String, dynamic> json) => _$WordTreeFromJson(json);
 
-  @override
-  final String userId;
-  @override
-  final int totalWords;
-  @override
-  final DateTime createdAt;
-  final List<TreeNode> _nodes;
-  @override
-  @JsonKey()
-  List<TreeNode> get nodes {
-    if (_nodes is EqualUnmodifiableListView) return _nodes;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_nodes);
-  }
+@override final  String userId;
+@override final  int totalWords;
+@override final  DateTime createdAt;
+ final  List<TreeNode> _nodes;
+@override@JsonKey() List<TreeNode> get nodes {
+  if (_nodes is EqualUnmodifiableListView) return _nodes;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_nodes);
+}
 
-  @override
-  final int treeLevelUnlocked;
-  @override
-  final DateTime? lastUpdated;
+@override final  int treeLevelUnlocked;
+@override final  DateTime? lastUpdated;
 
-  @override
-  String toString() {
+/// Create a copy of WordTree
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$WordTreeCopyWith<_WordTree> get copyWith => __$WordTreeCopyWithImpl<_WordTree>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$WordTreeToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _WordTree&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.totalWords, totalWords) || other.totalWords == totalWords)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&const DeepCollectionEquality().equals(other.nodes, _nodes)&&(identical(other.treeLevelUnlocked, treeLevelUnlocked) || other.treeLevelUnlocked == treeLevelUnlocked)&&(identical(other.lastUpdated, lastUpdated) || other.lastUpdated == lastUpdated));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+    return Object.hash(runtimeType,userId,totalWords,createdAt,const DeepCollectionEquality().hash(_nodes),treeLevelUnlocked,lastUpdated);
+}
+
+@override
+String toString() {
     return 'WordTree(userId: $userId, totalWords: $totalWords, createdAt: $createdAt, nodes: $nodes, treeLevelUnlocked: $treeLevelUnlocked, lastUpdated: $lastUpdated)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$WordTreeImpl &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.totalWords, totalWords) ||
-                other.totalWords == totalWords) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            const DeepCollectionEquality().equals(other._nodes, _nodes) &&
-            (identical(other.treeLevelUnlocked, treeLevelUnlocked) ||
-                other.treeLevelUnlocked == treeLevelUnlocked) &&
-            (identical(other.lastUpdated, lastUpdated) ||
-                other.lastUpdated == lastUpdated));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      userId,
-      totalWords,
-      createdAt,
-      const DeepCollectionEquality().hash(_nodes),
-      treeLevelUnlocked,
-      lastUpdated);
-
-  /// Create a copy of WordTree
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$WordTreeImplCopyWith<_$WordTreeImpl> get copyWith =>
-      __$$WordTreeImplCopyWithImpl<_$WordTreeImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$WordTreeImplToJson(
-      this,
-    );
-  }
 }
 
-abstract class _WordTree implements WordTree {
-  const factory _WordTree(
-      {required final String userId,
-      required final int totalWords,
-      required final DateTime createdAt,
-      final List<TreeNode> nodes,
-      required final int treeLevelUnlocked,
-      final DateTime? lastUpdated}) = _$WordTreeImpl;
 
-  factory _WordTree.fromJson(Map<String, dynamic> json) =
-      _$WordTreeImpl.fromJson;
-
-  @override
-  String get userId;
-  @override
-  int get totalWords;
-  @override
-  DateTime get createdAt;
-  @override
-  List<TreeNode> get nodes;
-  @override
-  int get treeLevelUnlocked;
-  @override
-  DateTime? get lastUpdated;
-
-  /// Create a copy of WordTree
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$WordTreeImplCopyWith<_$WordTreeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+abstract mixin class _$WordTreeCopyWith<$Res> implements $WordTreeCopyWith<$Res> {
+  factory _$WordTreeCopyWith(_WordTree value, $Res Function(_WordTree) _then) = __$WordTreeCopyWithImpl;
+@override @useResult
+$Res call({
+ String userId, int totalWords, DateTime createdAt, List<TreeNode> nodes, int treeLevelUnlocked, DateTime? lastUpdated
+});
+
+
+
+
+}
+/// @nodoc
+class __$WordTreeCopyWithImpl<$Res>
+    implements _$WordTreeCopyWith<$Res> {
+  __$WordTreeCopyWithImpl(this._self, this._then);
+
+  final _WordTree _self;
+  final $Res Function(_WordTree) _then;
+
+/// Create a copy of WordTree
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? userId = null,Object? totalWords = null,Object? createdAt = null,Object? nodes = null,Object? treeLevelUnlocked = null,Object? lastUpdated = freezed,}) {
+  return _then(_WordTree(
+userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,totalWords: null == totalWords ? _self.totalWords : totalWords // ignore: cast_nullable_to_non_nullable
+as int,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,nodes: null == nodes ? _self._nodes : nodes // ignore: cast_nullable_to_non_nullable
+as List<TreeNode>,treeLevelUnlocked: null == treeLevelUnlocked ? _self.treeLevelUnlocked : treeLevelUnlocked // ignore: cast_nullable_to_non_nullable
+as int,lastUpdated: freezed == lastUpdated ? _self.lastUpdated : lastUpdated // ignore: cast_nullable_to_non_nullable
+as DateTime?,
+  ));
+}
+
+
+}
+
+// dart format on

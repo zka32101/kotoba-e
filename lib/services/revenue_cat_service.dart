@@ -76,7 +76,8 @@ class RevenueCatService {
   // ── パッケージ購入 ───────────────────────────────────
   Future<CustomerInfo> purchasePackage(Package package) async {
     try {
-      final customerInfo = await Purchases.purchasePackage(package);
+      final result = await Purchases.purchase(PurchaseParams.package(package));
+      final customerInfo = result.customerInfo;
       _customerInfo = customerInfo;
       return customerInfo;
     } catch (e) {

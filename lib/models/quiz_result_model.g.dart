@@ -6,9 +6,8 @@ part of 'quiz_result_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$QuizResultModelImpl _$$QuizResultModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$QuizResultModelImpl(
+_QuizResultModel _$QuizResultModelFromJson(Map<String, dynamic> json) =>
+    _QuizResultModel(
       resultId: json['resultId'] as String,
       userId: json['userId'] as String,
       quizDate: DateTime.parse(json['quizDate'] as String),
@@ -19,8 +18,7 @@ _$QuizResultModelImpl _$$QuizResultModelImplFromJson(
       completedAt: DateTime.parse(json['completedAt'] as String),
     );
 
-Map<String, dynamic> _$$QuizResultModelImplToJson(
-        _$QuizResultModelImpl instance) =>
+Map<String, dynamic> _$QuizResultModelToJson(_QuizResultModel instance) =>
     <String, dynamic>{
       'resultId': instance.resultId,
       'userId': instance.userId,
