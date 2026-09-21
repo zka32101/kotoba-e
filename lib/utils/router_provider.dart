@@ -12,6 +12,9 @@ import 'package:kotoba_e/screens/settings_screen.dart';
 import 'package:kotoba_e/screens/shell_screen.dart';
 import 'package:kotoba_e/screens/signup_screen.dart';
 import 'package:kotoba_e/screens/stats_screen.dart';
+import 'package:kotoba_e/screens/tree_detail_screen.dart';
+import 'package:kotoba_e/screens/tree_screen.dart';
+import 'package:kotoba_e/screens/daily_word_screen.dart';
 import 'package:kotoba_e/screens/welcome_screen.dart';
 import 'package:kotoba_e/screens/word_detail_screen.dart';
 import 'package:kotoba_e/screens/paywall_screen.dart';
@@ -82,6 +85,21 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/home/collection',
             builder: (context, state) => const CollectionScreen(),
+          ),
+          GoRoute(
+            path: '/home/tree',
+            builder: (context, state) => const TreeScreen(),
+          ),
+          GoRoute(
+            path: '/home/tree/:wordId',
+            builder: (context, state) {
+              final wordId = state.pathParameters['wordId'] ?? '';
+              return TreeDetailScreen(wordId: wordId);
+            },
+          ),
+          GoRoute(
+            path: '/home/daily-word',
+            builder: (context, state) => const DailyWordScreen(),
           ),
           GoRoute(
             path: '/home/paywall',
