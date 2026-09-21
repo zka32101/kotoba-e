@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kotoba_e/config/theme.dart';
 import 'package:kotoba_e/firebase_options.dart';
+import 'package:kotoba_e/providers/daily_word_provider.dart';
 import 'package:kotoba_e/services/local_storage_service.dart';
 import 'package:kotoba_e/services/revenue_cat_service.dart';
 import 'package:kotoba_e/utils/router_provider.dart';
+
+/// 通知タップ等、BuildContext を経由せずにSnackBarを表示するためのキー
+final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,9 +37,20 @@ void main() async {
     debugPrint('[RevenueCat] 初期化エラー: $e');
   }
 
+  // runApp より前に router 等へアクセスするため、ProviderContainer を明示的に作成
+  final container = ProviderContainer();
+
+  try {
+    await initializeFirebaseMessaging(container);
+    debugPrint('[FCM] 初期化完了');
+  } catch (e) {
+    debugPrint('[FCM] 初期化エラー: $e');
+  }
+
   runApp(
-    const ProviderScope(
-      child: KotobaEApp(),
+    UncontrolledProviderScope(
+      container: container,
+      child: const KotobaEApp(),
     ),
   );
 }
@@ -47,8 +62,20 @@ class KotobaEApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
 
+    ref.listen(latestForegroundMessageProvider, (previous, message) {
+      if (message == null) return;
+      final title = message.notification?.title;
+      final body = message.notification?.body;
+      final text = [title, body].whereType<String>().join(' - ');
+      if (text.isEmpty) return;
+      scaffoldMessengerKey.currentState?.showSnackBar(
+        SnackBar(content: Text(text)),
+      );
+    });
+
     return MaterialApp.router(
       title: 'ことばえ',
+      scaffoldMessengerKey: scaffoldMessengerKey,
       theme: AppTheme.getLightTheme(),
       routerConfig: router,
       debugShowCheckedModeBanner: false,

@@ -1,27 +1,48 @@
+import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:kotoba_e/firebase_options.dart';
 import 'package:kotoba_e/models/daily_word_model.dart';
+import 'package:kotoba_e/providers/auth_provider.dart';
+import 'package:kotoba_e/utils/router_provider.dart';
+
+/// 季節の言葉一覧（assets/data/daily_words_2026.json から読み込み）
+final dailyWordsProvider = FutureProvider<List<DailyWord>>((ref) async {
+  try {
+    final raw = await rootBundle.loadString('assets/data/daily_words_2026.json');
+    final json = jsonDecode(raw) as Map<String, dynamic>;
+    final list = json['dailyWords'] as List<dynamic>;
+    return list
+        .map((j) => DailyWord.fromJson(j as Map<String, dynamic>))
+        .toList();
+  } catch (_) {
+    return [];
+  }
+});
 
 /// 本日の季節用語を取得
 final todaysDailyWordProvider = FutureProvider<DailyWord?>((ref) async {
-  try {
-    final now = DateTime.now();
-    final dayOfYear = int.parse(now.toString().split('-').sublist(1).join());
+  final words = await ref.watch(dailyWordsProvider.future);
+  if (words.isEmpty) return null;
 
-    // JSONから今日の用語を取得（実装では Firestore から取得する予定）
-    final word = await _getDailyWordForDay(dayOfYear);
-    return word;
-  } catch (e) {
-    return null;
+  final dateStr = _todayDateStr();
+  for (final word in words) {
+    if (word.date == dateStr) return word;
   }
+
+  // データ年と異なる年に実行された場合など、一致がない時は年内通算日で周期選択
+  final now = DateTime.now();
+  final dayOfYear = now.difference(DateTime(now.year, 1, 1)).inDays + 1;
+  return words[(dayOfYear - 1) % words.length];
 });
 
 /// ユーザーの FCM トークンを管理
 final fcmTokenProvider = FutureProvider<String?>((ref) async {
   try {
-    final token = await FirebaseMessaging.instance.getToken();
-    return token;
+    return await FirebaseMessaging.instance.getToken();
   } catch (e) {
     return null;
   }
@@ -30,81 +51,70 @@ final fcmTokenProvider = FutureProvider<String?>((ref) async {
 /// 通知を許可するかどうか
 final notificationPermissionProvider = StateProvider<bool>((ref) => true);
 
+/// フォアグラウンドで受信した最新の通知（UI側でSnackBar等の表示に使用）
+final latestForegroundMessageProvider =
+    StateProvider<RemoteMessage?>((ref) => null);
+
 /// ユーザーの FCM トークンを Firestore に保存
 final fcmTokenSyncProvider = FutureProvider<void>((ref) async {
-  try {
-    final token = await ref.watch(fcmTokenProvider.future);
-    if (token != null) {
-      final userId = 'current-user'; // 実装では auth から取得
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(userId)
-          .collection('fcm_tokens')
-          .doc(token)
-          .set({
-        'token': token,
-        'createdAt': FieldValue.serverTimestamp(),
-        'platform': 'flutter',
-      });
-    }
-  } catch (e) {
-    rethrow;
-  }
+  final user = ref.watch(currentUserProvider);
+  if (user == null) return;
+
+  final token = await ref.watch(fcmTokenProvider.future);
+  if (token == null) return;
+
+  await FirebaseFirestore.instance
+      .collection('users')
+      .doc(user.userId)
+      .collection('fcm_tokens')
+      .doc(token)
+      .set({
+    'token': token,
+    'createdAt': FieldValue.serverTimestamp(),
+    'platform': 'flutter',
+  });
 });
 
 /// 今日の通知が既に送信されたか確認
 final dailyNotificationSentProvider = FutureProvider<bool>((ref) async {
-  try {
-    final now = DateTime.now();
-    final dateStr = '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
+  final user = ref.watch(currentUserProvider);
+  if (user == null) return false;
 
-    final userId = 'current-user';
-    final doc = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .collection('daily_notifications')
-        .doc(dateStr)
-        .get();
+  final doc = await FirebaseFirestore.instance
+      .collection('users')
+      .doc(user.userId)
+      .collection('daily_notifications')
+      .doc(_todayDateStr())
+      .get();
 
-    return doc.exists;
-  } catch (e) {
-    return false;
-  }
+  return doc.exists;
 });
 
-/// 日の通知履歴を記録
-Future<void> recordDailyNotificationSent(String dateStr) async {
-  try {
-    final userId = 'current-user';
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .collection('daily_notifications')
-        .doc(dateStr)
-        .set({
-      'sentAt': FieldValue.serverTimestamp(),
-      'word': null, // 実装では単語情報を保存
-    });
-  } catch (e) {
-    rethrow;
-  }
+/// 今日の通知履歴を記録
+Future<void> recordDailyNotificationSent({
+  required String userId,
+  String? wordId,
+}) async {
+  await FirebaseFirestore.instance
+      .collection('users')
+      .doc(userId)
+      .collection('daily_notifications')
+      .doc(_todayDateStr())
+      .set({
+    'sentAt': FieldValue.serverTimestamp(),
+    'wordId': wordId,
+  });
 }
 
-/// ヘルパー関数：日付から季節用語を取得
-Future<DailyWord?> _getDailyWordForDay(int dayOfYear) async {
-  try {
-    // 実装では Firestore から取得
-    // ここではダミー実装
-    return null;
-  } catch (e) {
-    return null;
-  }
+String _todayDateStr() {
+  final now = DateTime.now();
+  return '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
 }
 
 /// Firebase Messaging の初期化
-Future<void> initializeFirebaseMessaging() async {
+/// [container] は main() で作成した ProviderContainer（router や auth 状態へアクセスするため）
+Future<void> initializeFirebaseMessaging(ProviderContainer container) async {
   try {
-    // 通知の許可をリクエスト
     final settings = await FirebaseMessaging.instance.requestPermission(
       alert: true,
       announcement: false,
@@ -114,40 +124,54 @@ Future<void> initializeFirebaseMessaging() async {
       sound: true,
     );
 
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      // バックグラウンド メッセージ ハンドラー
-      FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    final authorized =
+        settings.authorizationStatus == AuthorizationStatus.authorized ||
+            settings.authorizationStatus == AuthorizationStatus.provisional;
+    if (!authorized) return;
 
-      // フォアグラウンド メッセージ ハンドラー
-      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-        _handleMessage(message);
-      });
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-      // 通知タップハンドラー
-      FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-        _handleMessageTap(message);
-      });
+    // フォアグラウンド受信：状態を更新し、UI側（KotobaEApp）でSnackBar表示
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      container.read(latestForegroundMessageProvider.notifier).state = message;
+    });
+
+    // バックグラウンドで受信した通知をタップしてアプリを開いた場合
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      _handleMessageTap(container, message);
+    });
+
+    // 完全終了状態から通知タップでアプリを起動した場合
+    final initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+    if (initialMessage != null) {
+      _handleMessageTap(container, initialMessage);
     }
   } catch (e) {
     rethrow;
   }
 }
 
-/// バックグラウンド メッセージハンドラー
+/// バックグラウンド メッセージハンドラー（別Isolateで実行されるためFirebase再初期化が必要）
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // バックグラウンドで受信した通知を処理
-  // （Firestore に記録など）
+  try {
+    if (Firebase.apps.isEmpty) {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    }
+  } catch (_) {
+    // プレースホルダー値のまま起動した場合はそのまま何もしない
+  }
 }
 
-/// フォアグラウンド メッセージハンドラー
-void _handleMessage(RemoteMessage message) {
-  // フォアグラウンドで受信した通知を処理
-  // （SnackBar 表示など）
-}
-
-/// 通知タップハンドラー
-void _handleMessageTap(RemoteMessage message) {
-  // 通知がタップされたときの処理
-  // （詳細画面へのナビゲーション など）
+/// 通知タップハンドラー：通知データに wordId があれば単語詳細へ、なければ今日の言葉画面へ
+void _handleMessageTap(ProviderContainer container, RemoteMessage message) {
+  final router = container.read(routerProvider);
+  final wordId = message.data['wordId'];
+  if (wordId is String && wordId.isNotEmpty) {
+    router.go('/home/word/$wordId');
+  } else {
+    router.go('/home/daily-word');
+  }
 }
