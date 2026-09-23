@@ -11,6 +11,7 @@ class LocalStorageService {
   static const String _subscriptionStatusKey = 'subscription_status';
   static const String _textDisplayModeKey = 'text_display_mode';
   static const String _isLoggedInKey = 'is_logged_in';
+  static const String _dailyNotificationEnabledKey = 'daily_notification_enabled';
 
   late SharedPreferences _prefs;
 
@@ -42,6 +43,14 @@ class LocalStorageService {
   }
 
   bool isLoggedIn() => _prefs.getBool(_isLoggedInKey) ?? false;
+
+  // 通知設定
+  Future<void> setDailyNotificationEnabled(bool enabled) async {
+    await _prefs.setBool(_dailyNotificationEnabledKey, enabled);
+  }
+
+  bool isDailyNotificationEnabled() =>
+      _prefs.getBool(_dailyNotificationEnabledKey) ?? true;
 
   // User Settings
   Future<void> saveUserType(String userType) async {
