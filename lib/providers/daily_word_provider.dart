@@ -7,6 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:kotoba_e/firebase_options.dart';
 import 'package:kotoba_e/models/daily_word_model.dart';
 import 'package:kotoba_e/providers/auth_provider.dart';
+import 'package:kotoba_e/services/local_storage_service.dart';
 import 'package:kotoba_e/utils/router_provider.dart';
 
 /// 季節の言葉一覧（assets/data/daily_words_2026.json から読み込み）
@@ -48,24 +49,42 @@ final fcmTokenProvider = FutureProvider<String?>((ref) async {
   }
 });
 
-/// 通知を許可するかどうか
-final notificationPermissionProvider = StateProvider<bool>((ref) => true);
+/// 通知を許可するかどうか（設定画面のトグルで変更、SharedPreferencesに永続化）
+class NotificationPermissionNotifier extends StateNotifier<bool> {
+  NotificationPermissionNotifier()
+      : super(localStorageService.isDailyNotificationEnabled());
+
+  Future<void> setEnabled(bool enabled) async {
+    state = enabled;
+    await localStorageService.setDailyNotificationEnabled(enabled);
+  }
+}
+
+final notificationPermissionProvider =
+    StateNotifierProvider<NotificationPermissionNotifier, bool>(
+  (ref) => NotificationPermissionNotifier(),
+);
 
 /// フォアグラウンドで受信した最新の通知（UI側でSnackBar等の表示に使用）
 final latestForegroundMessageProvider =
     StateProvider<RemoteMessage?>((ref) => null);
 
 /// ユーザーの FCM トークンを Firestore に保存
+// userId の変化のみを監視する（currentUserProvider 全体を watch すると、
+// ユーザー情報の更新のたびに不要なFirestore書き込みが発生してしまうため）。
 final fcmTokenSyncProvider = FutureProvider<void>((ref) async {
-  final user = ref.watch(currentUserProvider);
-  if (user == null) return;
+  final userId = ref.watch(currentUserProvider.select((u) => u?.userId));
+  if (userId == null) return;
+
+  final notificationsEnabled = ref.watch(notificationPermissionProvider);
+  if (!notificationsEnabled) return;
 
   final token = await ref.watch(fcmTokenProvider.future);
   if (token == null) return;
 
   await FirebaseFirestore.instance
       .collection('users')
-      .doc(user.userId)
+      .doc(userId)
       .collection('fcm_tokens')
       .doc(token)
       .set({
@@ -77,12 +96,12 @@ final fcmTokenSyncProvider = FutureProvider<void>((ref) async {
 
 /// 今日の通知が既に送信されたか確認
 final dailyNotificationSentProvider = FutureProvider<bool>((ref) async {
-  final user = ref.watch(currentUserProvider);
-  if (user == null) return false;
+  final userId = ref.watch(currentUserProvider.select((u) => u?.userId));
+  if (userId == null) return false;
 
   final doc = await FirebaseFirestore.instance
       .collection('users')
-      .doc(user.userId)
+      .doc(userId)
       .collection('daily_notifications')
       .doc(_todayDateStr())
       .get();

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kotoba_e/config/theme.dart';
 import 'package:kotoba_e/firebase_options.dart';
 import 'package:kotoba_e/providers/daily_word_provider.dart';
+import 'package:kotoba_e/providers/subscription_provider.dart';
 import 'package:kotoba_e/services/local_storage_service.dart';
 import 'package:kotoba_e/services/revenue_cat_service.dart';
 import 'package:kotoba_e/utils/router_provider.dart';
@@ -62,8 +63,13 @@ class KotobaEApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
 
+    // ログイン状態の変化に連動してRevenueCatの購読状態とFCMトークンを同期
+    ref.watch(revenueCatSyncProvider);
+    ref.watch(fcmTokenSyncProvider);
+
     ref.listen(latestForegroundMessageProvider, (previous, message) {
       if (message == null) return;
+      if (!ref.read(notificationPermissionProvider)) return;
       final title = message.notification?.title;
       final body = message.notification?.body;
       final text = [title, body].whereType<String>().join(' - ');

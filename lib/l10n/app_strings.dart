@@ -36,6 +36,8 @@ class AppStrings {
       'settings_logout': 'ログアウト',
       'settings_version': 'バージョン 1.0.0',
       'settings_section_text_display': '表記法',
+      'settings_section_notifications': '通知',
+      'settings_daily_notification_toggle': '今日の言葉リマインダー',
     },
     'en': {
       // Navigation
@@ -62,6 +64,8 @@ class AppStrings {
       'settings_logout': 'Log Out',
       'settings_version': 'Version 1.0.0',
       'settings_section_text_display': 'Text Display',
+      'settings_section_notifications': 'Notifications',
+      'settings_daily_notification_toggle': 'Daily Word Reminder',
     },
   };
 

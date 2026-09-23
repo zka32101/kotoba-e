@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:kotoba_e/config/theme.dart';
 import 'package:kotoba_e/l10n/app_strings.dart';
 import 'package:kotoba_e/providers/auth_provider.dart';
+import 'package:kotoba_e/providers/daily_word_provider.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -15,6 +16,7 @@ class SettingsScreen extends ConsumerWidget {
     final gradeLevel = ref.watch(gradeLevelProvider);
     final userType = ref.watch(userTypeProvider);
     final textDisplayMode = ref.watch(textDisplayModeProvider);
+    final notificationsEnabled = ref.watch(notificationPermissionProvider);
     final t = ref.watch(appStringsProvider);
 
     return Scaffold(
@@ -119,6 +121,26 @@ class SettingsScreen extends ConsumerWidget {
                 ),
               ),
             ],
+          ),
+          const SizedBox(height: 24),
+
+          // ── 通知設定 ──
+          _SectionTitle(label: t('settings_section_notifications')),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: AppTheme.divider),
+            ),
+            child: SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text(t('settings_daily_notification_toggle'), style: AppTheme.bodyMedium),
+              value: notificationsEnabled,
+              activeColor: AppTheme.primary,
+              onChanged: (v) =>
+                  ref.read(notificationPermissionProvider.notifier).setEnabled(v),
+            ),
           ),
           const SizedBox(height: 24),
 

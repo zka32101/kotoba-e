@@ -159,14 +159,17 @@ final restorePurchasesProvider =
 );
 
 // ── RevenueCat Sync Provider（ユーザーログイン時に自動同期） ───────────────────────────────────
+// userId の変化のみを監視する（currentUserProvider 全体を watch すると、
+// updateSubscriptionFromRevenueCat の updatedAt 更新が再度このプロバイダーを
+// 再実行させ、無限ループになってしまうため）。
 final revenueCatSyncProvider = FutureProvider<void>((ref) async {
-  final user = ref.watch(currentUserProvider);
+  final userId = ref.watch(currentUserProvider.select((u) => u?.userId));
 
-  if (user != null && user.userId != 'guest' && user.userId != 'anonymous') {
+  if (userId != null && userId != 'guest' && userId != 'anonymous') {
     // ユーザーがログインしている場合、RevenueCat に userId を設定
     final service = ref.watch(revenueCatServiceProvider);
     try {
-      await service.setUserId(user.userId);
+      await service.setUserId(userId);
 
       // subscription 情報を取得して、ユーザーモデルを更新
       await ref.read(currentUserProvider.notifier).updateSubscriptionFromRevenueCat();

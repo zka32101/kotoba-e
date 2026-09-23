@@ -5,6 +5,7 @@ import 'package:kotoba_e/providers/word_provider.dart';
 import 'package:kotoba_e/providers/srs_provider.dart';
 import 'package:kotoba_e/providers/bookmark_provider.dart';
 import 'package:kotoba_e/services/local_storage_service.dart';
+import 'package:kotoba_e/services/word_index.dart';
 
 // ── クイズ完了日履歴（SharedPreferences 永続） ────────────────
 
@@ -126,6 +127,7 @@ class QuizSessionNotifier extends StateNotifier<QuizSessionState> {
   Future<void> initializeQuiz({int gradeLevel = 3}) async {
     final allWords = await _ref.read(allWordsProvider.future);
     if (allWords.isEmpty) return;
+    final index = await _ref.read(wordIndexProvider.future);
 
     // SRS優先: 今日の復習対象 + 未レビューのブックマーク
     final dueIds = _ref.read(dueTodayWordIdsProvider).toSet();
@@ -149,7 +151,7 @@ class QuizSessionNotifier extends StateNotifier<QuizSessionState> {
     final questionWords = [...priorityWords, ...otherWords].take(5).toList();
 
     state = QuizSessionState(
-      questions: _buildQuestions(questionWords, allWords, gradeLevel: gradeLevel),
+      questions: _buildQuestions(questionWords, allWords, index, gradeLevel: gradeLevel),
       currentIndex: 0,
       answers: [],
       isCompleted: false,
@@ -158,7 +160,8 @@ class QuizSessionNotifier extends StateNotifier<QuizSessionState> {
 
   List<QuizQuestion> _buildQuestions(
     List<WordModel> questionWords,
-    List<WordModel> allWords, {
+    List<WordModel> allWords,
+    WordIndex index, {
     int gradeLevel = 3,
   }) {
     final gradeKey = 'grade$gradeLevel';
@@ -172,11 +175,21 @@ class QuizSessionNotifier extends StateNotifier<QuizSessionState> {
           word.descriptions['grade1'] ??
           word.wordName;
 
-      final wrongWords = allWords
+      // 同カテゴリの単語を優先的に誤答候補にし、消去法で解けない紛らわしい選択肢にする
+      final relatedCandidates = index.relatedTo(word.wordId, limit: 20)..shuffle();
+      final fallbackCandidates = allWords
           .where((w) => w.wordId != word.wordId)
           .toList()
         ..shuffle();
-      final wrongOptions = wrongWords.take(3).map((w) {
+
+      final wrongWords = <WordModel>[];
+      for (final w in [...relatedCandidates, ...fallbackCandidates]) {
+        if (wrongWords.any((existing) => existing.wordId == w.wordId)) continue;
+        wrongWords.add(w);
+        if (wrongWords.length >= 3) break;
+      }
+
+      final wrongOptions = wrongWords.map((w) {
         return w.descriptions[gradeKey] ??
             w.descriptions['grade3'] ??
             w.descriptions['grade1'] ??
